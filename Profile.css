@@ -1,0 +1,379 @@
+html, body {
+  font-family: Arial, sans-serif;
+}
+
+.content {
+  min-height: 100%;
+
+}
+h1 {
+  color: #000;
+  text-align: center;
+  margin-top: 100px;
+}
+h2 {
+  color: #000;
+  text-align: center;
+  font-size: 15px;
+}
+
+a:link {
+  color: blue;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #333;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: gold;
+  text-decoration: none;
+}
+
+#breadcrumbs {
+  margin-top: 80px;
+}
+.clear {
+  clear: both;
+}
+
+ul#navigationbar {
+  margin-top: 0px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: lightblue;
+}
+
+li.navigationItems {
+  float: left;
+  display: block;
+  width: 100px;
+  padding-left: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 0;
+  text-align: center;
+}
+  li a:link, li a:visited {
+      color: black;
+      text-decoration: none;
+  }
+
+  li a:hover {
+    color: gold;
+    text-decoration: none;
+  }
+
+
+  li#selected {
+    text-decoration: underline;
+  }
+
+  li#logout {
+    float: right;
+  }
+
+  li#help {
+    float: right;
+    cursor: pointer;
+  }
+
+
+    li#login {
+      float: right;
+    }
+
+  img.help {
+      max-width: 20px;
+      max-height: 20px;
+    }
+
+  /*end navigation bar section*/
+
+  /*left side*/
+
+  div#left {
+    width: 60%;
+    float: left;
+  }
+
+  div#title {
+    color: black;
+  }
+
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 0px;
+  }
+
+  h4 {
+    color: lightblue;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .portrait {
+    width: 25%;
+    border: 1px solid black;
+    float: left;
+    margin-bottom: 10px;
+    margin-right: 10%;
+  }
+
+  #profileImage {
+    width: 100%;
+    height: 100%;
+  }
+
+
+ul#briefBio {
+  width: 30%;
+  height: 50%;
+  float: left;
+  list-style: none;
+  display: inline-block;
+  margin-top: 0px;
+  padding-top: 5%;
+  padding-right: 20%;
+  border: 1px solid black;
+ }
+
+ li#characterName {
+   font-size: 22px;
+   color: lightblue;
+ }
+
+ li.bioFacts {
+   font-size: 20px;
+   padding-left: 10%;
+   padding-top: 10%;
+   color: inherit;
+ }
+
+ #editProfileButton {
+    display: block;
+    width: 60px;
+
+    font-size: 12px;
+
+    padding-left: 5%;
+    padding-right: 2%;
+
+    margin-left: 90%;
+    margin-top: 20%;
+    margin-bottom: 2px;
+
+    border-radius: 5px;
+    background-color: lightblue;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 5px 5px 5px 5px;
+}
+
+#delete {
+   display: block;
+   width: 60px;
+
+   font-size: 12px;
+
+   padding-left: 5%;
+   padding-right: 2%;
+
+   margin-left: 90%;
+   margin-top: 20%;
+   margin-bottom: 2px;
+
+   border-radius: 5px;
+   background-color: red;
+   cursor: pointer;
+   border: 1px solid black;
+   padding: 5px 5px 5px 5px;
+}
+
+
+/*start the right sided section*/
+
+  div#right {
+    width: 35%;
+    float: right;
+    padding-top: 14px;
+    font-family: sans-serif;
+    margin-bottom: 100px;
+  }
+
+  .familyTabs {
+    width: 20%;
+    font-size: 10px;
+    cursor: pointer;
+  }
+
+  div#familyMembers {
+    border: 1px solid black;
+    margin-top: 2px;
+    padding-bottom: 12px;
+  }
+
+  div#familyMembers li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  #addParentButton, #addPartnerButton, #addSiblingButton, #addChildrenButton {
+    float: right;
+    background-color: lightblue;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 5px 5px 5px 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    border: 1px solid black;
+  }
+
+  #Parents{
+    list-style: none;
+  }
+  #Partners {
+    list-style: none;
+    display: none;
+  }
+  #Siblings {
+    list-style: none;
+    display: none;
+  }
+  #Children {
+    list-style: none;
+    display: none;
+  }
+
+  #editBio{
+    float: right;
+    margin-right: 5%;
+  }
+
+  #submitBioButton {
+    float: left;
+    width: 40%;
+  }
+
+  div#AddExisting {
+    display: none;
+  }
+
+  div#AddNew {
+    display: none;
+
+  }
+
+/*bottom section*/
+
+  div#bottom {
+    float: left;
+    width: 60%;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+  }
+
+  h5 {
+    font-size: 20px;
+    text-decoration: underline;
+    display: inline;
+  }
+
+  h6 {
+    font-size: 15px;
+  }
+  #AddParable {
+    display: inline;
+    margin-left: 10%;
+  }
+
+  #addParableForm {
+    display: block;
+  }
+  #submitParableButton {
+    width: 10%;
+    display: block;
+  }
+  #footer {
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    left: 0;
+    float: left;
+    background-color: lightblue;
+    margin-top: -50px;
+  }
+
+
+  #footerList {
+    list-style: none;
+    padding-left:40%;
+  }
+
+  #footerList li {
+    display: inline;
+    padding-left: 20px;
+  }
+
+
+/*media queries to help with responsiveness */
+  @media screen and (max-width: 650px) {
+
+    h1 {
+      padding-top: 5%;
+    }
+
+    li#characterName {
+      font-size: 18px;
+    }
+
+    li.bioFacts {
+      font-size: 12px;
+      padding-left: 10%;
+      padding-top: 10%;
+      color: inherit;
+    }
+
+    div#left {
+      float: left;
+      margin-left: 0px;
+      width: 100%;
+    }
+
+    /*remove breadcrumbs*/
+    #breadcrumbs {
+      display: none;
+    }
+
+    div#right {
+      display: none;
+    }
+
+    div#bottom {
+      width: 100%;
+    }
+
+    #characterSearch {
+      display: none;
+    }
+
+  }
+
+  @media screen and (max-width: 580px) {
+    h2 {
+      display:none;
+    }
+
+    #selectTrees {
+      display: none;
+    }
+  }
