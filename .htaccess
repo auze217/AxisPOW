@@ -1,0 +1,22 @@
+Options -Indexes
+
+RewriteEngine on
+
+# ErrorDocument 404 /error.php
+
+
+RewriteRule ^$ app/controller/siteController.php?action=home [QSA,L]
+RewriteRule ^trees/?$ app/controller/siteController.php?action=trees [QSA,L]
+RewriteRule ^characterDatabase/?$ app/controller/siteController.php?action=database [QSA,L]
+RewriteRule ^login/?$ app/controller/siteController.php?action=loginProcess [QSA,L]
+RewriteRule ^logout/?$ app/controller/siteController.php?action=logout [QSA,L]
+
+
+# member
+RewriteRule ^member/view/(\w+)/?$ app/controller/memberController.php?action=view&id=$1 [QSA,L]
+RewriteRule ^member/add/?$ app/controller/memberController.php?action=add [QSA,L]
+RewriteRule ^member/add/bio/?$ app/controller/memberController.php?action=addBio [QSA,L]
+RewriteRule ^member/update/(\w+)/?$ app/controller/memberController.php?action=update&id=$1 [QSA,L]
+RewriteRule ^member/delete/process/(\w+)/?$ app/controller/memberController.php?action=deleteProcess&id=$1 [QSA,L]
+RewriteRule ^member/delete/(\w+)/?$ app/controller/memberController.php?action=delete&id=$1 [QSA,L]
+RewriteRule ^member/addParable/(\w+)/?$ app/controller/memberController.php?action=addParable&id=$1 [QSA,L]
