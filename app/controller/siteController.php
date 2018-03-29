@@ -18,10 +18,6 @@ class SiteController {
 				$this->home();
 				break;
 
-			case 'trees':
-				$this->trees();
-				break;
-
 			case 'database':
 				$this->database();
 				break;

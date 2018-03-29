@@ -62,7 +62,14 @@ class MemberController {
 		include_once SYSTEM_PATH.'/view/add.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
   }
+	public function index() {
+		$camps = Camp::getCamps();
 
+		$pageTitle = "POW Camps"
+		include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/camps.tpl';
+		include_once SYSTEM_PATH.'/view/footer.tpl';
+	}
 	public function deleteProcess($id) {
 		$member = Member::loadById($id);
 		$pageTitle = 'Delete '.$member->first_name.' '.$member->last_name;
@@ -72,7 +79,7 @@ class MemberController {
 	}
 
 	public function delete($id) {
-		
+
 		$member = Member::loadById($id);
 		$member->delete();
 		header('Location: '.BASE_URL.'/characterDatabase'); exit();
