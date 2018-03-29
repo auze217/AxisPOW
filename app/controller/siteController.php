@@ -38,6 +38,13 @@ class SiteController {
 
 	}
 
+	public function login() {
+		$title = 'Login';
+
+		include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/sign_in.tpl';
+		include_once SYSTEM_PATH.'/view/header.tpl';
+	}
 	public function loginProcess($un, $pw) {
 		//$correctUsername = 'Zeus';
 		//$correctPassword = 'God';

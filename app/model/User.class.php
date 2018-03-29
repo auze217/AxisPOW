@@ -15,7 +15,7 @@
     public static function loadById($id) {
       $db = Db::instance();// create db connection
       //build query
-      $q = sprintf("SELECT * FROM '%s' WHERE id= %d;"),
+      $q = sprintf("SELECT * FROM '%s' WHERE id= %d;",
         self::DB_TABLE,
         $id
         );
@@ -62,10 +62,10 @@
       $q = sprintf("INSERT INTO '%s' ('first_name','last_name','username', 'password', 'email')
           VALUES(%s, %s, %s, %s, %s);"
             self::DB_TABLE,
-            $db->escape($this->first)
-            $db->escape($this->last)
-            $db->escape($this->username)
-            $db->escape($this->password)
+            $db->escape($this->first),
+            $db->escape($this->last),
+            $db->escape($this->username),
+            $db->escape($this->password),
             $db->escape($this->email)
             );
       $db->query($q);
