@@ -7,5 +7,5 @@ define('BASE_URL','http://localhost/cs3744/project3/heumanj'); # your base URL s
 
 define('DB_USER', 'root');
 define('DB_HOST', 'localhost');
-define('DB_DATABASE', 'mythologytree');
-define('DB_PASS', '');
+define('DB_DATABASE', 'axispow');
+define('DB_PASS', 'cs3744');

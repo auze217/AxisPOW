@@ -25,7 +25,9 @@ class SiteController {
 			case 'database':
 				$this->database();
 				break;
-
+			case 'login':
+				$this->login();
+				break;
 			case 'loginProcess':
 				$username = $_POST['username'];
 				$password = $_POST['pw'];
@@ -41,20 +43,20 @@ class SiteController {
 	}
 
 	public function loginProcess($un, $pw) {
-		$correctUsername = 'Zeus';
-		$correctPassword = 'God';
+		//$correctUsername = 'Zeus';
+		//$correctPassword = 'God';
+		$user = array();
+		$user = User::getUsers();
 
-		if($un != $correctUsername)
-			header('Location: '.BASE_URL);
-		elseif($pw != $correctPassword)
-			header('Location: '.BASE_URL);
-		else {
-			$_SESSION['username'] = $un;
-			header('Location: '.BASE_URL.'/trees'); exit();
+		for (int i = 0; i < count($user); i++) {
+			$row = $user[i];
+			if ( $un == $row[username] && $pw == $row[password]) {
+				$_SESSION['username'] = $un;
+				//I guess we need a dashboard template and stuff.
+				header('Location: '.BASE_URL.'/dashboard'); exit();
+			}
 		}
-
-		//echo 'username: '.$un.'<br>';
-		//echo 'password: '.$pw;
+		header('Location: '.BASE_URL.'/login'); exit();
 
 	}
 

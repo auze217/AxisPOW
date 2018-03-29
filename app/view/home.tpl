@@ -1,4 +1,5 @@
-<!doctype html>
+<!--<!doctype html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,10 +9,10 @@
     <link rel="icon" href="../../../../favicon.ico">
 
     <title>Jumbotron Template for Bootstrap</title>
-
+  -->
     <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <!--<link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    -->
     <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/4.0/examples/jumbotron/jumbotron.css" rel="stylesheet">
   </head>

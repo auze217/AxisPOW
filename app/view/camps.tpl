@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -6,12 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
-    <!-- For this we might not even need since the title will be handled in siteController -->
-    <title>Temporary Title</title>
+-->
+
 
     <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <!--  <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+-->
     <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/4.0/examples/product/product.css" rel="stylesheet">
   </head>

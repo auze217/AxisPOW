@@ -4,13 +4,14 @@ RewriteEngine on
 
 # ErrorDocument 404 /error.php
 
-
+#normal actions
 RewriteRule ^$ app/controller/siteController.php?action=home [QSA,L]
-RewriteRule ^trees/?$ app/controller/siteController.php?action=trees [QSA,L]
 RewriteRule ^characterDatabase/?$ app/controller/siteController.php?action=database [QSA,L]
-RewriteRule ^login/?$ app/controller/siteController.php?action=loginProcess [QSA,L]
+RewriteRule ^login/?$ app/controller/siteController.php?action=login
+RewriteRule ^login/process?$ app/controller/siteController.php?action=loginProcess [QSA,L]
 RewriteRule ^logout/?$ app/controller/siteController.php?action=logout [QSA,L]
-
+RewriteRule ^signup/?$ app/controller/siteController.php?action=signup [QSA,L]
+RewriteRule ^signup/process?$ app/controller/siteController.php?action=signupProcess [QSA,L]
 
 # member
 RewriteRule ^member/view/(\w+)/?$ app/controller/memberController.php?action=view&id=$1 [QSA,L]
