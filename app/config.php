@@ -8,4 +8,4 @@ define('BASE_URL','http://localhost/AxisPOW'); # your base URL should be http://
 define('DB_USER', 'root');
 define('DB_HOST', 'localhost');
 define('DB_DATABASE', 'axispow');
-define('DB_PASS', 'cs3744');
+define('DB_PASS', '');

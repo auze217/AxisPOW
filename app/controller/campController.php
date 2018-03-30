@@ -40,8 +40,11 @@ class CampController {
     }
   }
   public function index() {
-    $camps = Camp::getCamps();
-
+  //  $camps = Camp::getCamps();
+  $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE)or die('Error: '.$conn->connect_error);
+      //getting all the characters from the database
+      $q = "SELECT * FROM camps ORDER BY name ASC;";
+      $result = $conn->query($q);
     $pageTitle = "POW Camps";
     include_once SYSTEM_PATH.'/view/header.tpl';
     include_once SYSTEM_PATH.'/view/camps.tpl';

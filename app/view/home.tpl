@@ -35,11 +35,12 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Profile</a>
           </li>
-          <?php if(isset($_SESION['username'])): ?>
+          <?php if(isset($_SESSION['username'])): ?>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="<?= BASE_URL ?>/logout">Logout</a>
           </li>
-          <?php else: ?>
+          <?php else:
+            ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASE_URL ?>/login">Login</a>
           </li>
@@ -61,8 +62,8 @@
     </nav>
 
     <main role="main">
-
-      <!-- Main jumbotron for a primary marketing message or call to action -->
+      
+      <!-- Main jumbotron for a   primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-3">AXIS Prisoners of War</h1>

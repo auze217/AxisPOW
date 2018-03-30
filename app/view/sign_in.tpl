@@ -31,7 +31,7 @@
            <a class="nav-link" href="<?= BASE_URL ?>/">Home <span class="sr-only">(current)</span></a>
          </li>
          <li class="nav-item">
-           <a class="nav-link" href="<?= BASE_URL ?>/index">Prison Camps</a>
+           <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
          </li>
          <li class="nav-item">
            <a class="nav-link" href="#">Profile</a>

@@ -58,19 +58,22 @@ class SiteController {
 	public function loginProcess($un, $pw) {
 		//$correctUsername = 'Zeus';
 		//$correctPassword = 'God';
-		$user = array();
-		$user = User::getUsers();
+		//i hate models so I'm not gonna use them for this.
+		//connecting to the database
+		$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+		$q = "SELECT * FROM users ORDER BY username ASC;";
 
-		for ($i = 0; $i < count($user); $i++) {
-			$row = $user[$i];
-			if ( $un == $row[username] && $pw == $row[password]) {
-				$_SESSION['username'] = $un;
-				//I guess we need a dashboard template and stuff.
-				header('Location: '.BASE_URL.'/dashboard'); exit();
+		$resultU = $conn->query($q);
+		//getting all the users from the database to check to see
+		//if the entered username and password match anyone
+		while($row = $resultU->fetch_assoc()) {
+			if($un == $row['username'] && $pw == $row['password']) {
+					$_SESSION['username'] = $un;
+				header('Location: '.BASE_URL.'/'); exit();
 			}
 		}
-		header('Location: '.BASE_URL.'/login'); exit();
-
+		  header('Location: '.BASE_URL.'/login');
+			exit();
 	}
 
   public function home() {

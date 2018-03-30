@@ -21,6 +21,7 @@
         );
       $result = $db->query($q); //execute query
       //make sure we found something
+    
       if ($result->num_rows == 0) {
         return null;
       }
