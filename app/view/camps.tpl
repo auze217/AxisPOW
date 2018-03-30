@@ -15,7 +15,6 @@
   </head>
 
   <body>
-
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="#">Guide</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,17 +24,17 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="<?= BASE_URL ?>/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?= BASE_URL ?>/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
+            <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Profile</a>
           </li>
           <?php if(isset($_SESSION['username'])): ?>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="<?= BASE_URL ?>/logout">(<?=$_SESSION['username']?>)Logout</a>
           </li>
           <?php else: ?>
           <li class="nav-item">
@@ -63,7 +62,7 @@
         <h1 class="display-4 font-weight-normal">Prisoner of War Camps in America</h1>
         <p class="lead font-weight-normal">Click on any of the prisoner of war camps to get more information on them.</p>
         <!-- might not need this probably get rid of it -->
-        <a class="btn btn-outline-secondary" href="<?= BASE_URL ?>/camps/add">Add a Prison Camp</a>
+        <a class="btn btn-primary" href="<?= BASE_URL ?>/camps/add">Add a Prison Camp</a>
       </div>
     </div>
     <?php while ($row = $result->fetch_assoc()): ?>
@@ -72,7 +71,7 @@
           <div class="my-3 py-3">
             <h2 class="display-5"><a href="<?=BASE_URL?>/camps/view/<?= $row['id'] ?>"><?= $row['name']?></a></h2>
             <p class="lead"><?= $row['state'] ?></p>
-            <a href="<?=BASE_URL?>/camps/delete/<?= $row['id']?>" class="btn btn-sm btn-outline-secondary"> Delete Camp Entry </a>
+            <a href="<?=BASE_URL?>/camps/delete/process/<?= $row['id']?>" class="btn btn-sm btn-outline-secondary"> Delete Camp Entry </a>
           </div>
           <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
           <img style="height:100%" style="width:100%" src="<?= BASE_URL ?>/public/img/<?= $row['image'] ?>" class="img-rounded" alt="Image of <?= $row['name'] ?>"></div>

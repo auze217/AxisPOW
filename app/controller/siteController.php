@@ -104,23 +104,19 @@ class SiteController {
 		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 	public function signupProcess($un, $pw, $fn, $ln, $em) {
-		$users = User::getUsers();
-		if(empty($un) || empty($pw) || empty($fn) || empty($ln) || empty($em)) {
-			header('Location: '.BASE_URL.'/signup'); exit();
-		}
-		//create a new user;
-		$user = new User();
-
-		//define fields
-		$user->first_name = $fn;
-		$user->last_name = $ln;
-		$user->username = $un;
-		$user->password = $un;
-		$user->email = $em;
-
-		//go to the created users save function
-		$id = $user->save();
-
+		//connects to the database
+		$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die("Connection Failed: " . $conn->connect_error);
+		//adding to the table in the database
+		$sql = sprintf("INSERT INTO `users` (`first_name`, `last_name`, `username`, `password`, `email`) VALUES
+		('%s', '%s', '%s', '%s', '%s');",
+    $fn,
+		$ln,
+		$un,
+		$pw,
+		$em
+    );
+		//checks to see if it was successfully added to the database
+		$conn->query($sql) or die('Error:'.$conn->error);
 		header('Location: '.BASE_URL.'/login'); exit();
 	}
 

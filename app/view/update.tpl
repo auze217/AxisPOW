@@ -12,17 +12,17 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="<?= BASE_URL ?>/">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="<?= BASE_URL ?>/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
+          <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Profile</a>
         </li>
         <?php if(isset($_SESSION['username'])): ?>
         <li class="nav-item">
-          <a class="nav-link" href="#">Logout</a>
+          <a class="nav-link" href="<?= BASE_URL ?>/logout">(<?=$_SESSION['username']?>)Logout</a>
         </li>
         <?php else: ?>
         <li class="nav-item">
@@ -44,6 +44,8 @@
       </form>
     </div>
   </nav>
+
+
 
 
 <div class="container">

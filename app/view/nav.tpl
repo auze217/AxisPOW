@@ -17,7 +17,7 @@
       </li>
       <?php if(isset($_SESSION['username'])): ?>
       <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" href="<?= BASE_URL ?>/logout">(<?=$_SESSION['username']?>)Logout</a>
       </li>
       <?php else: ?>
       <li class="nav-item">

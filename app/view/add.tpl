@@ -2,7 +2,6 @@
 </head>
 
 <body class="bg-light">
-
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="#">Guide</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,17 +11,17 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="<?= BASE_URL ?>/">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="<?= BASE_URL ?>/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
+          <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps  <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Profile</a>
         </li>
         <?php if(isset($_SESSION['username'])): ?>
         <li class="nav-item">
-          <a class="nav-link" href="#">Logout</a>
+          <a class="nav-link" href="<?= BASE_URL ?>/logout">(<?=$_SESSION['username']?>)Logout</a>
         </li>
         <?php else: ?>
         <li class="nav-item">
@@ -46,6 +45,8 @@
   </nav>
 
 
+
+
 <div class="container">
   <div class="py-5 text-center">
     <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
@@ -55,7 +56,7 @@
 
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Enter Camp Name</h4>
-      <form id="add" action="<?= BASE_URL ?>/member/add/process" method="POST" class="needs-validation" novalidate>
+      <form id="add" action="<?= BASE_URL ?>/camps/add/process" method="POST" class="needs-validation" novalidate>
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="campName">Camp name</label>

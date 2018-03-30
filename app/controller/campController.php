@@ -65,6 +65,9 @@ class CampController {
     include_once SYSTEM_PATH.'/view/footer.tpl';
   }
   public function add() {
+    if(!isset($_SESSION['username'])){
+      header('Location: '.BASE_URL.'/login'); exit();
+    }
     $pageTitle = "Add Camp";
     include_once SYSTEM_PATH.'/view/header.tpl';
   	include_once SYSTEM_PATH.'/view/add.tpl';
@@ -79,16 +82,19 @@ class CampController {
     if (empty($name) || empty($state)) {
       header('Location: '.BASE_URL.'/camps/add'); exit();
     }
-    $camp = new Camp();
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+    //models refused to cooperate
+		$q = sprintf("INSERT INTO `camps` (`name`, `state`, `prisoners`, `image`) VALUES
+    ('%s', '%s', '%s', '%s');",
+    $name,
+    $state,
+    $prisoners,
+    $image
+    );
 
-    $camp->name = $name;
-    $camp->state = $state;
-    $camp->prisoners = $prisoners;
-    $camp->image = $image;
+  $conn->query($q) or die('Error: '.$conn->error);
 
-    $id = $camp->save();
-
-    header('Location: '.BASE_URL.'/camps/view/'.$id); exit();
+    header('Location: '.BASE_URL.'/camps'); exit();
   }
   public function view($id) {
     //connecting to the database
@@ -117,6 +123,9 @@ class CampController {
     include_once SYSTEM_PATH.'/view/footer.tpl';
   }
   public function update($id) {
+    if(!isset($_SESSION['username'])){
+      header('Location: '.BASE_URL.'/login'); exit();
+    }
     $pageTitle="Update";
     //connecting to the database
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
@@ -149,21 +158,7 @@ class CampController {
 		$prisoners		 = $_POST['prisoners'];
 		$image	 = $_POST['image'];
     $row = $result->fetch_assoc();
-	/*	//check if the user wants the variables want to be updated
-		if(!empty($name)) {
-			$camp->name = $name;
-		}
 
-		if(!empty($state)) {
-			$member->state = $state;
-		}
-		if(!empty($soldiers)) {
-			$member->soldiers = $soldiers;
-
-		}
-		if(!empty($image)) {
-			$member->image = $image;
-		}*/
     if(empty($name)) {
       $name = $row['name'];
     }
@@ -180,6 +175,9 @@ class CampController {
 		header('Location: '.BASE_URL.'/camps/view/'.$id); exit();
   }
   public function delete($id) {
+    if(!isset($_SESSION['username'])){
+      header('Location: '.BASE_URL.'/login'); exit();
+    }
     $camp = Camp::loadById($id);
     $pageTitle = 'Delete'.$camp->name;
     include_once SYSTEM_PATH.'/view/header.tpl';
@@ -187,9 +185,15 @@ class CampController {
     include_once SYSTEM_PATH.'/view/footer.tpl';
   }
   public function deleteProcess($id) {
-    $camp = Camp::loadById($id);
-		$camp->delete();
-		header('Location: '.BASE_URL.'/member'); exit();
+    if(!isset($_SESSION['username'])){
+      header('Location: '.BASE_URL.'/login'); exit();
+    }
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+
+    $q = sprintf("DELETE FROM camps WHERE id='$id'");
+
+    $conn->query($q) or die('Error: '.$conn->error);
+		header('Location: '.BASE_URL.'/camps'); exit();
   }
 
 }

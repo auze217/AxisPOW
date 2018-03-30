@@ -28,7 +28,7 @@
      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
        <ul class="navbar-nav mr-auto">
          <li class="nav-item active">
-           <a class="nav-link" href="<?= BASE_URL ?>/">Home <span class="sr-only">(current)</span></a>
+           <a class="nav-link" href="<?= BASE_URL ?>/">Home</a>
          </li>
          <li class="nav-item">
            <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
@@ -38,11 +38,11 @@
          </li>
          <?php if(isset($_SESSION['username'])): ?>
          <li class="nav-item">
-           <a class="nav-link" href="#">Logout</a>
+           <a class="nav-link" href="<?= BASE_URL ?>/logout">(<?=$_SESSION['username']?>)Logout</a>
          </li>
          <?php else: ?>
          <li class="nav-item">
-           <a class="nav-link" href="<?= BASE_URL ?>/login">Login</a>
+           <a class="nav-link" href="<?= BASE_URL ?>/login">Login<span class="sr-only">(current)</span></a>
          </li>
          <?php endif; ?>
          <li class="nav-item dropdown">
@@ -62,6 +62,7 @@
    </nav>
 
 
+
     <form method="POST" action="<?= BASE_URL?>/login/process" class="form-signin">
       <img class="mb-4" src="<?=BASE_URL?>/public/img/logo.jpg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -72,6 +73,11 @@
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <div class="checkbox mb-3">
+        <label>
+          <a href="<?=BASE_URL?>/signup" > Create an Account </a>
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

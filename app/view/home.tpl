@@ -37,10 +37,9 @@
           </li>
           <?php if(isset($_SESSION['username'])): ?>
           <li class="nav-item">
-            <a class="nav-link" href="<?= BASE_URL ?>/logout">Logout</a>
+            <a class="nav-link" href="<?= BASE_URL ?>/logout">(<?=$_SESSION['username']?>)Logout</a>
           </li>
-          <?php else:
-            ?>
+          <?php else: ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASE_URL ?>/login">Login</a>
           </li>
@@ -62,7 +61,7 @@
     </nav>
 
     <main role="main">
-      
+
       <!-- Main jumbotron for a   primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">

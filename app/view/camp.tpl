@@ -13,17 +13,17 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="<?= BASE_URL ?>/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?= BASE_URL ?>/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
+            <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Profile</a>
           </li>
-          <?php if(isset($_SESION['username'])): ?>
+          <?php if(isset($_SESSION['username'])): ?>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="<?= BASE_URL ?>/logout">(<?=$_SESSION['username']?>)Logout</a>
           </li>
           <?php else: ?>
           <li class="nav-item">
@@ -46,11 +46,13 @@
       </div>
     </nav>
 
+
+
     <main role="main">
   <!--    <?php $row=$result->fetch_assoc() ?> -->
       <section class="jumbotron text-center" style="background-image: url('<?= BASE_URL ?>/public/img/<?= $r['image']?>');">
         <div class="container">
-          <h1 class="jumbotron-heading"><?= $r['name'] ?></h1>
+          <h1 class="jumbotron-heading text-white"><?= $r['name'] ?></h1>
           <p class="text-white">State: <?=$r['state']?></p>
           <p class="text-white">
             Prisoners: <?= $r['prisoners'] ?>
@@ -58,6 +60,7 @@
         </div>
       </section>
       <button id="addEventButton" class="btn btn-sm btn-outline-secondary"> Add Life Event </button>
+        <a href="<?=BASE_URL?>/camps/delete/process/<?= $row['id']?>" class="btn btn-sm btn-outline-secondary" style="margin-right: 50px;"> Delete Camp Entry </a>
       <a class="btn btn-sm btn-outline-secondary" style="float: right;" href="<?=BASE_URL?>/camps/update/<?=$r['id']?>"> Edit Camp Info</a>
       <form id="addEventForm" style="display:none;" action="<?= BASE_URL ?>/camps/event/<?= $r['id']?>" method="POST">
         <div class="mb-3">
@@ -92,7 +95,7 @@
               <div class="card mb-4 box-shadow">
 
                 <div class="card-body">
-                  <p class="card-text"><strong> <?= $levents['Title'] ?></strong> </p>
+                  <p class="card-text"><strong> <?= $levents['title'] ?></strong> </p>
                   <p class="card-text"><?= $levents['details'] ?></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
