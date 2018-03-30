@@ -63,39 +63,38 @@ class MemberController {
 		include_once SYSTEM_PATH.'/view/footer.tpl';
   }
 	public function index() {
-		$camps = Camp::getCamps();
+		//$camps = Camp::getCamps();
 
-		$pageTitle = "POW Camps"
-		include_once SYSTEM_PATH.'/view/header.tpl';
-		include_once SYSTEM_PATH.'/view/camps.tpl';
+		$pageTitle = "POW Camps";
+	//	include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/signup.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
-	public function deleteProcess($id) {
-		$member = Member::loadById($id);
-		$pageTitle = 'Delete '.$member->first_name.' '.$member->last_name;
+	public function delete($id) {
+		$camp = Camp::loadById($id);
+		$pageTitle = 'Delte'.$camp->name;
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/delete.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 
-	public function delete($id) {
+	public function deleteProcess($id) {
 
-		$member = Member::loadById($id);
-		$member->delete();
-		header('Location: '.BASE_URL.'/characterDatabase'); exit();
+		$camp = Camp::loadById($id);
+		$camp->delete();
+		header('Location: '.BASE_URL.'/member'); exit();
 
 
 	}
 
 	public function view($id) {
 
-		$member = Member::loadById($id);
-		$pageTitle = $member->first_name.' '.$member->last_name;
+		$camp = Camp::loadById($id);
+		$pageTitle = $camp->name;
 		include_once SYSTEM_PATH.'/view/header.tpl';
-		if($member != null) {
+		if($camp != null) {
 			$parables = Parable::getParablesById($id);
-			//$parent = Member::getParents();
-			include_once SYSTEM_PATH.'/view/profile.tpl';
+			include_once SYSTEM_PATH.'/view/camp.tpl';
 		} else {
 			die('Invalid member ID');
 		}
@@ -107,29 +106,29 @@ class MemberController {
 	public function update($id) {
 
 		// get POST variables
-		$member = Member::loadById($id);
-		$firstName 	 = $_POST['first_name'];
-		$picture_file 	 = $_POST['picture_file'];
-		$first_fact		 = $_POST['first_fact'];
-		$second_fact	 = $_POST['second_fact'];
+		$camp = Camp::loadById($id);
+		$name 	 = $_POST['camp_name'];
+		$state 	 = $_POST['state'];
+		$soldiers		 = $_POST['soldiers'];
+		$image	 = $_POST['image'];
 
 		//check if the user wants the variables want to be updated
-		if(!empty($firstName)) {
-			$member->first_name = $firstName;
+		if(!empty($name)) {
+			$camp->name = $name;
 		}
 
-		if(!empty($picture_file)) {
-			$member->picture_file = $picture_file;
+		if(!empty($state)) {
+			$member->state = $state;
 		}
-		if(!empty($first_fact)) {
-			$member->first_fact = $first_fact;
+		if(!empty($soldiers)) {
+			$member->soldiers = $soldiers;
 
 		}
-		if(!empty($second_fact)) {
-			$member->second_fact = $second_fact;
+		if(!empty($image)) {
+			$member->image = $image;
 		}
 
-		$id = $member->save();
+		$id = $camp->save();
 		header('Location: '.BASE_URL.'/member/view/'.$id); exit();
 	}
 

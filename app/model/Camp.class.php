@@ -8,6 +8,7 @@
     public $name = '';
     public $state = '';
     public $prisoners = '';
+    public $image = '';
 
     public static function loadById($id) {
       $db = Db::instance();
@@ -30,7 +31,7 @@
         $camps->name = $row['name'];
         $camps->state = $row['state'];
         $camps->prisoners = $row['prisoners'];
-
+        $camps->image = $row['image'];
         return $camps;
       }
 
@@ -61,35 +62,19 @@
         return null;
 
       $db = Db::instance(); //connect to database
-      $q = sprintf("INSERT INTO '%s' ('first_name','last_name','username', 'password', 'email')
-          VALUES(%s, %s, %s, %s, %s);"
-            self::DB_TABLE,
-            $db->escape($this->first)
-            $db->escape($this->last)
-            $db->escape($this->username)
-            $db->escape($this->password)
-            $db->escape($this->email)
-            );
-      $db->query($q);
-      $this->id = $db->getInsertID();
-      return $this->id;
-    }
-    public function insert() {
-      if($this->id != 0)
-        return null;
-
-      $db = Db::instance(); //connect to database
-      $q = sprintf("INSERT INTO '%s' ('name','state','prisoners')
-          VALUES(%s, %s, %d);"
+      $q = sprintf("INSERT INTO '%s' ('name','state','prisoners', 'image')
+          VALUES(%s, %s, %d, %s);"
             self::DB_TABLE,
             $db->escape($this->name),
             $db->escape($this->state),
-            $db->escape($this->prisoners)
+            $db->escape($this->prisoners),
+            $db->escape($this->image)
             );
       $db->query($q);
       $this->id = $db->getInsertID();
       return $this->id;
     }
+
     public function update() {
       if($this->id = 0) {
         return null;
@@ -100,12 +85,14 @@
       $q = sprintf("UPDATE `%s` SET
         `name`  = %s,
         `state`  = %s,
-        `prisoners` = %s,
+        `prisoners` = %d,
+        'image' = %s,
         WHERE `%s`.`id` = %d;",
         self::DB_TABLE,
         $db->escape($this->name),
         $db->escape($this->state),
         $db->escape($this->prisoners),
+        $db->escape($this->image),
         self::DB_TABLE,
         $db->escape($this->id)
         );

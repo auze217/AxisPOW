@@ -9,11 +9,10 @@
     <link rel="icon" href="../../../../favicon.ico">
 
     <title>Jumbotron Template for Bootstrap</title>
-  -->
-    <!-- Bootstrap core CSS -->
-    <!--<link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
-    -->
-    <!-- Custom styles for this template -->
+-->    <!-- Bootstrap core CSS -->
+<!--    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+-->    <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/4.0/examples/jumbotron/jumbotron.css" rel="stylesheet">
   </head>
 
@@ -28,17 +27,23 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?= BASE_URL ?>/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Prison Camps</a>
+            <a class="nav-link" href="<?= BASE_URL ?>/index">Prison Camps</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Profile</a>
           </li>
+          <?php if(isset($_SESION['username'])): ?>
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="#">Logout</a>
           </li>
+          <?php else: ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= BASE_URL ?>/login">Login</a>
+          </li>
+          <?php endif; ?>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">

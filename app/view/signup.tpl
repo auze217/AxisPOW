@@ -1,4 +1,4 @@
-<!doctype html>
+<!--<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -9,14 +9,15 @@
 
     <title>Sign Up</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+-->  <!-- Bootstrap core CSS -->
+<!--    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+-->    <!-- Custom styles for this template -->
     <link href="form-validation.css" rel="stylesheet">
   </head>
 
   <body class="bg-light">
+
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="#">Guide</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,7 +96,7 @@
 
             <div class="mb-3">
               <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+              <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com" required>
               <div class="invalid-feedback">
                 Please enter a valid email address.
               </div>
