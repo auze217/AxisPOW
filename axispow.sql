@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 30, 2018 at 05:10 AM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Host: localhost
+-- Generation Time: Mar 30, 2018 at 06:46 PM
+-- Server version: 5.6.39
+-- PHP Version: 7.0.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `camps` (
   `id` int(11) NOT NULL,
-  `name` varchar(150) NOT NULL,
-  `state` varchar(100) NOT NULL,
+  `name` varchar(1000) NOT NULL,
+  `state` varchar(1000) NOT NULL,
   `prisoners` int(11) NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,8 +41,39 @@ CREATE TABLE `camps` (
 --
 
 INSERT INTO `camps` (`id`, `name`, `state`, `prisoners`, `image`) VALUES
-(1, 'Camp Aliceville', 'Alabama', 6000, ''),
-(2, 'Camp Atterberry', 'Oklahoma', 13500, '');
+(1, 'Camp Aliceville', 'Alabama', 6000, 'aliceville.jpg'),
+(2, 'Camp Atterbury', 'Indiana', 13500, 'atterbury.jpg'),
+(3, 'Camp Florence', 'Arizona', 0, 'florence.jpg'),
+(4, 'Camp McAlester', 'Oklahoma', 0, 'mcalester.jpg'),
+(5, 'Camp New Ulm', 'Minnesota', 0, 'newulm.jpg'),
+(6, 'Camp Rhinelander', 'Wisconsin', 0, ''),
+(7, 'Camp Ritchie', 'Maryland', 0, 'ritchie.jpg'),
+(8, 'Camp Tonakawa', 'Oklahoma', 0, ''),
+(9, 'Camp White Rock', 'Texas', 0, ''),
+(10, 'Fort Kearney', 'Rhode Island', 0, ''),
+(11, 'Camp Salina', 'Utah', 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `life_event`
+--
+
+CREATE TABLE `life_event` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `details` varchar(20000) NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `camp_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `life_event`
+--
+
+INSERT INTO `life_event` (`id`, `title`, `details`, `image`, `camp_id`) VALUES
+(1, 'Aliceville POW Newspaper', 'While imprisoned, the prisoners created their own newspaper about daily events in the outside world and called their newspaper, \"The Fenced Guest\".', 'alicevillenewspaper.png', 1),
+(2, 'The Influx of Prisoners', 'The majority of prisoners in Aliceville came from the Allied Powers decisive victory at the Battle of El Alamein and in North Africa in November 1942. The victory resulted in over 3,000 prisoners needing to be housed and Aliceville was the chosen location.', '', 1);
 
 -- --------------------------------------------------------
 
@@ -77,6 +108,12 @@ ALTER TABLE `camps`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `life_event`
+--
+ALTER TABLE `life_event`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -90,13 +127,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `camps`
 --
 ALTER TABLE `camps`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `life_event`
+--
+ALTER TABLE `life_event`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
