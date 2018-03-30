@@ -43,12 +43,12 @@
     }
     public static function getUsers() {
       $db = Db::instance();
-      $q = "SELECT * FROM '".self::DB_TABLE"' ORDER BY username ASC;";
+      $q = "SELECT id FROM `".self::DB_TABLE."` ORDER BY username ASC;";
       $result = $db->query($q);
 
       $users = array();
       if($result->num_rows != 0) {
-        while ($row = result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
           $users[] = self::loadById($row['id']);
         }
       }
@@ -60,7 +60,7 @@
 
       $db = Db::instance(); //connect to database
       $q = sprintf("INSERT INTO '%s' ('first_name','last_name','username', 'password', 'email')
-          VALUES(%s, %s, %s, %s, %s);"
+          VALUES(%s, %s, %s, %s, %s);",
             self::DB_TABLE,
             $db->escape($this->first),
             $db->escape($this->last),

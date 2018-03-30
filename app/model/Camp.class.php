@@ -38,12 +38,12 @@
     }
     public static function getCamps() {
       $db = Db::instance();
-      $q = "SELECT * FROM '".self::DB_TABLE"' ORDER BY name ASC;";
+      $q = "SELECT id FROM `".self::DB_TABLE."` ORDER BY last_name ASC;";
       $result = $db->query($q);
 
       $users = array();
       if($result->num_rows != 0) {
-        while ($row = result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
           $users[] = self::loadById($row['id']);
         }
       }
@@ -63,7 +63,7 @@
 
       $db = Db::instance(); //connect to database
       $q = sprintf("INSERT INTO '%s' ('name','state','prisoners', 'image')
-          VALUES(%s, %s, %d, %s);"
+          VALUES(%s, %s, %d, %s);",
             self::DB_TABLE,
             $db->escape($this->name),
             $db->escape($this->state),
