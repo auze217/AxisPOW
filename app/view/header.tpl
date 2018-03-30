@@ -7,8 +7,6 @@
   <meta name="author" content="">
   <link rel="icon" href="<?= BASE_URL ?>/public/img/logo.jpg">
 
-  <title>Sign In</title>
-
   <!-- Bootstrap core CSS -->
   <link href="<?= BASE_URL ?>/public/css/bootstrap.min.css" rel="stylesheet">
 
@@ -17,3 +15,5 @@
   <script type="text/javascript" src="<?= BASE_URL ?>/public/js/jquery-3.3.1.min.js"></script>
 
   <script type="text/javascript" src="<?= BASE_URL ?>/public/js/jquery-script.js"></script>
+    <script type="text/javascript" src="<?= BASE_URL ?>/public/js/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

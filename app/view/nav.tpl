@@ -15,7 +15,7 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Profile</a>
       </li>
-      <?php if(isset($_SESION['username'])): ?>
+      <?php if(isset($_SESSION['username'])): ?>
       <li class="nav-item">
         <a class="nav-link" href="#">Logout</a>
       </li>

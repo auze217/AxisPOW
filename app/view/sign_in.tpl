@@ -36,7 +36,7 @@
          <li class="nav-item">
            <a class="nav-link" href="#">Profile</a>
          </li>
-         <?php if(isset($_SESION['username'])): ?>
+         <?php if(isset($_SESSION['username'])): ?>
          <li class="nav-item">
            <a class="nav-link" href="#">Logout</a>
          </li>
@@ -60,6 +60,7 @@
        </form>
      </div>
    </nav>
+
 
     <form method="POST" action="<?= BASE_URL?>/login/process" class="form-signin">
       <img class="mb-4" src="<?=BASE_URL?>/public/img/logo.jpg" alt="" width="72" height="72">

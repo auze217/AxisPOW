@@ -49,13 +49,13 @@
 <div class="container">
   <div class="py-5 text-center">
     <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-    <h2>Add a POW Camp</h2>
-    <p class="lead">If you want to add a new camp enter its information here.</p>
+    <h2>Update a POW Camp</h2>
+    <p class="lead">If you want to update a camp enter its information here.</p>
   </div>
-
+  <?php $row = $result->fetch_assoc() ?>
     <div class="col-md-8 order-md-1">
-      <h4 class="mb-3">Enter Camp Name</h4>
-      <form id="add" action="<?= BASE_URL ?>/member/add/process" method="POST" class="needs-validation" novalidate>
+      <h4 class="mb-3">Enter Camp Information</h4>
+      <form id="add" action="<?= BASE_URL ?>/camps/update/process/<?= $row['id']?>" method="POST" class="needs-validation" novalidate>
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="campName">Camp name</label>
@@ -95,7 +95,7 @@
         </div>
 
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" name="submit" type="submit">Add Camp</button>
+        <button class="btn btn-primary btn-lg btn-block" name="submit" type="submit">Update Camp</button>
       </form>
     </div>
   </div>

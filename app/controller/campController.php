@@ -37,7 +37,21 @@ class CampController {
       $id = $_GET['id'];
       $this->deleteProcess($id);
       break;
+    case 'camp':
+    //this is just a test case
+    $this->camp();
+    break;
+    case 'updateProcess':
+    $id = $_GET['id'];
+    $this->updateProcess($id);
+    break;
     }
+  }
+  public function camp() {
+    $pageTitle = 'Camp Aliceville';
+    include_once SYSTEM_PATH.'/view/header.tpl';
+    include_once SYSTEM_PATH.'/view/camp.tpl';
+    include_once SYSTEM_PATH.'/view/footer.tpl';
   }
   public function index() {
   //  $camps = Camp::getCamps();
@@ -77,25 +91,65 @@ class CampController {
     header('Location: '.BASE_URL.'/camps/view/'.$id); exit();
   }
   public function view($id) {
-    $camp = Camp::loadById($id);
-    $pageTitle = $camp->name;
-    include_once SYSTEM_PATH.'/view/header.tpl';
-    if ($camp != null) {
-      include_once SYSTEM_PATH.'/view/camp.tpl';
-    } else {
-      die('Invalid camp ID');
+    //connecting to the database
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+    $q = sprintf("SELECT * FROM camps WHERE id = '%d';",
+      $id
+    ) ;
+    //getting the information of that character based on the sql line
+    $result = $conn->query($q);
+    if(!$result) {
+      trigger_error('Invalid query: '.$conn->error);
     }
+    if ($result->num_rows == 0) {
+    }
+    //getting information of the character's lifeevents
+    $sql = sprintf("SELECT * FROM life_event WHERE camp_id = '%d';",
+      $id);
+    $life = $conn->query($sql);
+    if(!$life) {
+      trigger_error('Invalid query: '.$conn->error);
+    }
+    $r = $result->fetch_assoc();
+    $pageTitle = $r['name'];
+    include_once SYSTEM_PATH.'/view/header.tpl';
+    include_once SYSTEM_PATH.'/view/camp.tpl';
     include_once SYSTEM_PATH.'/view/footer.tpl';
   }
   public function update($id) {
+    $pageTitle="Update";
+    //connecting to the database
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+    $q = sprintf("SELECT * FROM camps WHERE id = '%d';",
+      $id
+    ) ;
+    //getting the information of that character based on the sql line
+    $result = $conn->query($q);
+    if(!$result) {
+      trigger_error('Invalid query: '.$conn->error);
+    }
+    include_once SYSTEM_PATH.'/view/header.tpl';
+    include_once SYSTEM_PATH.'/view/update.tpl';
+    include_once SYSTEM_PATH.'/view/footer.tpl';
+  }
+  public function updateProcess($id) {
     // get POST variables
-		$camp = Camp::loadById($id);
+    //connecting to the database
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+    $q = sprintf("SELECT * FROM camps WHERE id = '%d';",
+      $id
+    ) ;
+    //getting the information of that character based on the sql line
+    $result = $conn->query($q);
+    if(!$result) {
+      trigger_error('Invalid query: '.$conn->error);
+    }
 		$name 	 = $_POST['camp_name'];
 		$state 	 = $_POST['state'];
-		$soldiers		 = $_POST['soldiers'];
+		$prisoners		 = $_POST['prisoners'];
 		$image	 = $_POST['image'];
-
-		//check if the user wants the variables want to be updated
+    $row = $result->fetch_assoc();
+	/*	//check if the user wants the variables want to be updated
 		if(!empty($name)) {
 			$camp->name = $name;
 		}
@@ -109,10 +163,21 @@ class CampController {
 		}
 		if(!empty($image)) {
 			$member->image = $image;
-		}
+		}*/
+    if(empty($name)) {
+      $name = $row['name'];
+    }
+    if(empty($state))
+      $state = $row['state'];
+    if(empty($prisoners))
+      $prisoners = $row['prisoners'];
 
-		$id = $camp->save();
-		header('Location: '.BASE_URL.'/member/view/'.$id); exit();
+    if(empty($image))
+      $image = $row['image'];
+    $q = sprintf("UPDATE camps SET name='$name', state='$state', prisoners='$prisoners', image='$image' WHERE id='$id';");
+    $conn->query($q) or die('Error: '.$conn->error);
+	//	$id = $camp->save();
+		header('Location: '.BASE_URL.'/camps/view/'.$id); exit();
   }
   public function delete($id) {
     $camp = Camp::loadById($id);
