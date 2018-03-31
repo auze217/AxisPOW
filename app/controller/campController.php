@@ -69,9 +69,7 @@ class CampController {
       header('Location: '.BASE_URL.'/login'); exit();
     }
     $pageTitle = "Add Camp";
-    include_once SYSTEM_PATH.'/view/header.tpl';
   	include_once SYSTEM_PATH.'/view/add.tpl';
-  	include_once SYSTEM_PATH.'/view/footer.tpl';
   }
   public function addProcess() {
     $name = $_POST['camp_name'];
