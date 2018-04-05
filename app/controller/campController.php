@@ -45,8 +45,51 @@ class CampController {
     $id = $_GET['id'];
     $this->updateProcess($id);
     break;
+    case 'addLifeEventProcess':
+        $id = $_GET['id'];
+        $this->addLifeEventProcess($id);
+        break;
+    
     }
   }
+    public function addLifeEventProcess($id) {
+		$title = $_POST['title'];
+		$details = $_POST['details'];
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+
+        $q = sprintf("INSERT INTO `life_event` (`title`, `details`, `image`, `camp_id`) VALUES
+    ('%s', '%s', '%s', '%s');", $title, $details, "", $id);
+
+         $result = $conn->query($q);
+        if(!$result) {
+      trigger_error('Invalid query: '.$conn->error);
+    }
+    
+    $sql = sprintf("SELECT * FROM life_event WHERE camp_id = '%d';",
+      $id);
+    $life = $conn->query($sql);
+    if(!$life) {
+      trigger_error('Invalid query: '.$conn->error);
+    }
+   // $r = $result->fetch_assoc();
+        //    $pageTitle = $r['name'];
+        //    include_once SYSTEM_PATH.'/view/header.tpl';
+        //    include_once SYSTEM_PATH.'/view/camp.tpl';
+        //    include_once SYSTEM_PATH.'/view/footer.tpl';
+    header('Location: '.BASE_URL.'/camps/view/'.$id); exit();
+	//	if($le->id != 0) {
+			//$json = array(
+			//	'success' => 'success',
+			//	'life_event_id' => $soldierID
+			//);
+		//} else {
+	//		$json = array('error' => 'Could not save life event.');
+	//	}
+
+	//	header('Content-Type: application/json'); // let client know it's Ajax
+	//	echo json_encode($json); // print the JSON
+
+	}
   public function camp() {
     $pageTitle = 'Camp Aliceville';
     include_once SYSTEM_PATH.'/view/header.tpl';

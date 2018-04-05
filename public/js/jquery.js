@@ -30,6 +30,46 @@ $(document).ready(function(){
 
       $('#addEventForm').hide();
   });
+    
+    /*  $('#submitEventButton').click(function(){
+      //alert("HIT ITT");
+    // grab the data from the form
+      
+    var title = $('#eventTitle').val();
+    var details = $('#eventDescription').val();
+    var idNum = $('#idNum').val();
+    alert(baseurl);
+    // send form data via Ajax
+    $.post(
+      baseurl+'camps/view/life-event/add/process/' + idNum,
+      {
+        title: title,
+        details: details
+      },
+      function(data){
+        if(data.success == 'success') {
+            alert("hit success");
+          // data was saved successfully on the server
+          // build the title and details paragraph
+          var fullTitle = $('<p class="card-text"><strong>' +  title + '</p>');
+          var fullDetails = $('<p class="details">' + details + '</p>');
+
+          // add new content to events list
+          $('#events').prepend(fullDetails).prepend(fullTitle);
+
+          // now that we've submitted the form, hide it
+          $('#addEventForm').hide();
+        } else {
+          // server data wasn't saved successfully
+          alert('Server error: ' + data.error);
+        }
+      })
+      .fail(function(){
+        // the Ajax call failed
+        alert("Ajax call failed");
+      });
+        
+  });*/
 
 
 //adding parents to the parent box
