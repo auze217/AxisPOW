@@ -36,6 +36,7 @@ class Db {
 
   // get the ID of the last inserted object
   public function getInsertID() {
+
     return $this->conn->insert_id;
   }
 

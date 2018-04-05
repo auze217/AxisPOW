@@ -49,7 +49,7 @@ class CampController {
         $id = $_GET['id'];
         $this->addLifeEventProcess($id);
         break;
-    
+
     }
   }
     public function addLifeEventProcess($id) {
@@ -64,7 +64,7 @@ class CampController {
         if(!$result) {
       trigger_error('Invalid query: '.$conn->error);
     }
-    
+
     $sql = sprintf("SELECT * FROM life_event WHERE camp_id = '%d';",
       $id);
     $life = $conn->query($sql);
@@ -92,11 +92,17 @@ class CampController {
 	}
   public function camp() {
     $pageTitle = 'Camp Aliceville';
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
+    }
     include_once SYSTEM_PATH.'/view/header.tpl';
     include_once SYSTEM_PATH.'/view/camp.tpl';
     include_once SYSTEM_PATH.'/view/footer.tpl';
   }
   public function index() {
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
+    }
   //  $camps = Camp::getCamps();
   $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE)or die('Error: '.$conn->connect_error);
       //getting all the characters from the database
@@ -110,6 +116,9 @@ class CampController {
   public function add() {
     if(!isset($_SESSION['username'])){
       header('Location: '.BASE_URL.'/login'); exit();
+    }
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
     }
     $pageTitle = "Add Camp";
   	include_once SYSTEM_PATH.'/view/add.tpl';
@@ -138,6 +147,9 @@ class CampController {
     header('Location: '.BASE_URL.'/camps'); exit();
   }
   public function view($id) {
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
+    }
     //connecting to the database
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
     $q = sprintf("SELECT * FROM camps WHERE id = '%d';",
@@ -166,6 +178,9 @@ class CampController {
   public function update($id) {
     if(!isset($_SESSION['username'])){
       header('Location: '.BASE_URL.'/login'); exit();
+    }
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
     }
     $pageTitle="Update";
     //connecting to the database
@@ -215,19 +230,13 @@ class CampController {
 	//	$id = $camp->save();
 		header('Location: '.BASE_URL.'/camps/view/'.$id); exit();
   }
-  public function delete($id) {
-    if(!isset($_SESSION['username'])){
-      header('Location: '.BASE_URL.'/login'); exit();
-    }
-    $camp = Camp::loadById($id);
-    $pageTitle = 'Delete'.$camp->name;
-    include_once SYSTEM_PATH.'/view/header.tpl';
-    include_once SYSTEM_PATH.'/view/delete.tpl';
-    include_once SYSTEM_PATH.'/view/footer.tpl';
-  }
+
   public function deleteProcess($id) {
     if(!isset($_SESSION['username'])){
       header('Location: '.BASE_URL.'/login'); exit();
+    }
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
     }
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
 

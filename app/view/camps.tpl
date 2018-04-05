@@ -24,10 +24,10 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="<?= BASE_URL ?>/">Home</a>
+            <a class="nav-link" href="<?= BASE_URL ?>/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Profile</a>
@@ -41,6 +41,13 @@
             <a class="nav-link" href="<?= BASE_URL ?>/login">Login</a>
           </li>
           <?php endif; ?>
+          <?php if(isset($_SESSION['username']) && $user->permissions == 1): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= BASE_URL ?>/admin">Admin</a>
+          </li>
+        <?php endif; ?>
+
+          <!--need to have an admin page for if the logged in user is an admin -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -56,6 +63,24 @@
         </form>
       </div>
     </nav>
+
+          <!--need to have an admin page for if the logged in user is an admin -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
 
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center text-white bg-light" style="background: url('<?=BASE_URL?>/public/img/background.jpg')">
       <div class="col-md-5 p-lg-5 mx-auto my-5">

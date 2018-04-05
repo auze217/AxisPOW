@@ -60,7 +60,7 @@ class SiteController {
 		//$correctPassword = 'God';
 		//i hate models so I'm not gonna use them for this.
 		//connecting to the database
-		$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+/*		$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
 		$q = "SELECT * FROM users ORDER BY username ASC;";
 
 		$resultU = $conn->query($q);
@@ -73,15 +73,44 @@ class SiteController {
 			}
 		}
 		  header('Location: '.BASE_URL.'/login');
-			exit();
+			exit();*/
+			$pageTitle = 'Login Process';
+			$users = User::getUsers();
+			//    $u = User::loadById(1);
+			//  echo $u->username;
+			$un = $_POST['username'];
+			$pw = $_POST['password'];
+			echo $un;
+			echo $pw;
+			echo count($users);
+			foreach ($users as $user) {
+				if ( $un == $user->username && $pw == $user->password) {
+					$_SESSION['username'] = $un;
+					header('Location: '.BASE_URL.'/'); exit();
+				}
+			}
+			header('Location: '.BASE_URL.'/login'); exit();
 	}
 
   public function home() {
 		$pageTitle = 'Home';
+		if (isset($_SESSION['username'])) {
+			$user= User::loadByUn($_SESSION['username']);
+			echo $user->permissions;
+		}
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/home.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
   }
+	public function admin() {
+		if (isset($_SESSION['username'])) {
+			$user= User::loadByUn($_SESSION['username']);
+			echo $user->permissions;
+		}
+		include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/home.tpl';
+		include_once SYSTEM_PATH.'/view/footer.tpl';
+	}
 
 
 	public function logoutProcess() {
@@ -90,13 +119,6 @@ class SiteController {
 		header('Location: '.BASE_URL); exit(); // send us to home page
 	}
 
-	public function database() {
-		$pageTitle = 'Database';
-		$members = Member::getMembers();
-		include_once SYSTEM_PATH.'/view/header.tpl';
-		include_once SYSTEM_PATH.'/view/characterDatabase.tpl';
-		include_once SYSTEM_PATH.'/view/footer.tpl';
-  }
 	public function signup() {
 		$pageTitle = 'Sign Up';
 		include_once SYSTEM_PATH.'/view/header.tpl';
@@ -105,7 +127,7 @@ class SiteController {
 	}
 	public function signupProcess($un, $pw, $fn, $ln, $em) {
 		//connects to the database
-		$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die("Connection Failed: " . $conn->connect_error);
+/*		$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die("Connection Failed: " . $conn->connect_error);
 		//adding to the table in the database
 		$sql = sprintf("INSERT INTO `users` (`first_name`, `last_name`, `username`, `password`, `email`) VALUES
 		('%s', '%s', '%s', '%s', '%s');",
@@ -116,8 +138,21 @@ class SiteController {
 		$em
     );
 		//checks to see if it was successfully added to the database
-		$conn->query($sql) or die('Error:'.$conn->error);
-		header('Location: '.BASE_URL.'/login'); exit();
+		$conn->query($sql) or die('Error:'.$conn->error);*/
+		if(empty($un) || empty($pw) || empty($fn) || empty($ln) || empty($em)) {
+			header('Location: '.BASE_URL.'/signup'); exit();
+		}
+		$user = new User();
+		$user->username = $un;
+		$user->password = $pw;
+		$user->firstname = $fn;
+		$user->lastname = $ln;
+		$user->email = $em;
+		//$user->permissions = 0;
+		//echo $user->id;
+		$userID = $user->save();
+		//echo $userID;
+		//header('Location: '.BASE_URL.'/login'); exit();
 	}
 
 }
