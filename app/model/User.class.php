@@ -119,25 +119,22 @@ class User {
     $db = Db::instance(); // connect to db
 
     // build query
-    $q = sprintf("UPDATE `%s` SET
-      `username` = %s,
-      `password`  = %s,
-      `first_name` = %s,
-      'last_name' = %s,
-      'email' = %s,
-      'permissions' = %d
-      WHERE `id` = %d;",
-      self::DB_TABLE,
-      $db->escape($this->username),
-      $db->escape($this->password),
-      $db->escape($this->firstname),
-      $db->escape($this->lastname),
-      $db->escape($this->email),
-      $db->escape($this->permissions),
-      $db->escape($this->id)
+    $q = sprintf("UPDATE `users` SET `first_name` = '$this->firstname', `last_name` = '$this->lastname', `username` = '$this->username', `password` = '$this->password', `email` = '$this->email', `permissions` = '$this->permissions' WHERE `users`.`id` = $this->id;"
       );
     $db->query($q); // execute query
     return $db->id; // return this object's ID
+  }
+  public function delete() {
+    if($this->id == 0)
+      return null;
+
+      $db = Db::instance();
+      $q = sprintf("DELETE FROM users WHERE id='$this->id'");
+
+      $db->query($q);
+      return $this->id;
+
+
   }
 
 }

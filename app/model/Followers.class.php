@@ -1,23 +1,21 @@
 <?php
 
-class Camp {
-  const DB_TABLE = 'camps'; // database table name
+class Followers {
+  const DB_TABLE = 'user_followers'; // database table name
 
   // database fields for this table
   public $id = 0;
-  public $name = '';
-  public $state = '';
-  public $prisoners = '';
-  public $image = '';
-  //public $email = '';
-//  public $permissions = 0;
+  public $user_id = 0;
+  public $username = '';
+  public $follower = '';
+  public $follower_id = 0;
 
-
+  //dont think we need this function
   // return a Soldier object by ID
   public static function loadById($id) {
       $db = Db::instance(); // create db connection
       // build query
-      $q = sprintf("SELECT * FROM `%s` WHERE id = %d;",
+      $q = sprintf("SELECT * FROM `%s` WHERE user_id = %d;",
         self::DB_TABLE,
         $id
         );
@@ -29,31 +27,30 @@ class Camp {
       } else {
         $row = $result->fetch_assoc(); // get results as associative array
 
-        $soldier = new Camp(); // instantiate new Soldier object
+        $soldier = new User(); // instantiate new Soldier object
 
         // store db results in local object
-        $soldier->id           = $row['id'];
-        $soldier->name   = $row['name'];
-        $soldier->state    = $row['state'];
-        $soldier->prisoners         = $row['prisoners'];
-        $soldier->image = $row['image'];
-        //$soldier->email = $row['email'];
-        //$soldier->permissions = $row['permissions'];
+        $soldier->id = $row['id'];
+        $soldier->user_id           = $row['user_id'];
+        $soldier->username   = $row['username'];
+        $soldier->follower    = $row['follower'];
+        $soldier->follower_id         = $row['follower_id'];
         return $soldier; // return the soldier
       }
     }
   }
 
   // return all Soldiers as an array
-  public static function getCamps() {
+  public static function getFollowers($id) {
     $db = Db::instance();
-    $q = "SELECT id FROM `".self::DB_TABLE."` ORDER BY name ASC;";
+    $q = sprintf("SELECT * FROM user_followers WHERE user_id = '%d';",
+      $id);
     $result = $db->query($q);
 
     $soldiers = array();
     if($result->num_rows != 0) {
       while($row = $result->fetch_assoc()) {
-        $soldiers[] = self::loadById($row['id']);
+        $soldiers[] = User::loadById($row['follower_id']);
       }
     }
     return $soldiers;
@@ -74,13 +71,14 @@ class Camp {
     // build query
 
   //  echo $this->username;
-    $q = sprintf("INSERT INTO `camps` (`id`, `name`, `state`, `prisoners`, `image`) VALUES (NULL, '$this->name', '$this->state', '$this->prisoners', '$this->image');"
+    $q = sprintf("INSERT INTO `user_followers` (`user_id`, `username`, `follower`, `follower_id`) VALUES ( '$this->user_id', '$this->username', '$this->follower', '$this->follower_id');"
     );
 
     //echo $q;
     $db->query($q); // execute query
-    $this->id = $db->getInsertID(); // set the ID for the new object
-    echo $this->id;
+    //might need to make an id for the follower alone
+  //  $this->id = $db->getInsertID(); // set the ID for the new object
+    //echo $this->id;
     return $this->id;
   }
 
@@ -91,21 +89,22 @@ class Camp {
     $db = Db::instance(); // connect to db
 
     // build query
-    $q = sprintf("UPDATE `%s` SET
-      `name` = %s,
-      `state`  = %s,
-      `prisoners` = %s,
-      'image' = %s,
-      WHERE `id` = %d;",
-      self::DB_TABLE,
-      $db->escape($this->name),
-      $db->escape($this->state),
-      $db->escape($this->prisoners),
-      $db->escape($this->image),
-      $this->id
+    $q = sprintf("UPDATE `user_followers` SET `user_id` = '$this->user_id', `username` = '$this->username', `follower` = '$this->follower', `follower_id` = '$this->follower_id' WHERE `user_followers`.`id` = $this->id;"
       );
     $db->query($q); // execute query
     return $db->id; // return this object's ID
+  }
+  public function delete() {
+    if($this->id == 0)
+      return null;
+
+      $db = Db::instance();
+      $q = sprintf("DELETE FROM user_followers WHERE id='$this->id'");
+
+      $db->query($q);
+      return $this->id;
+
+
   }
 
 }

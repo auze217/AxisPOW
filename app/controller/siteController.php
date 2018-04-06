@@ -43,38 +43,47 @@ class SiteController {
 			case 'logout':
 				$this->logoutProcess();
 				break;
+			case 'dashboard':
+				$this->dashboard();
+				break;
+			case 'admin':
+				$this->admin();
+				break;
+			case 'deleteUser':
+				$id = $_GET['id'];
+				$this->deleteUser($id);
+				break;
+			case 'permission':
+				$id = $_GET['id'];
+				$this->permission($id);
+				break;
 
 		}
 
 	}
+	public function deleteUser($id) {
+		$pageTitle = 'deleteUser';
+		$user = User::loadById($id);
+		$user->delete();
 
+		header('Location: '.BASE_URL.'/admin'); exit();
+
+	}
+	public function permission($id) {
+		$user = User::loadById($id);
+		$user->permissions = 1;
+		$user->save();
+		header('Location: '.BASE_URL.'/admin'); exit();
+	}
 	public function login() {
-		$title = 'Login';
+		$pageTitle = 'Login';
 
 		//include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/sign_in.tpl';
 		//include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 	public function loginProcess($un, $pw) {
-		//$correctUsername = 'Zeus';
-		//$correctPassword = 'God';
-		//i hate models so I'm not gonna use them for this.
-		//connecting to the database
-/*		$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
-		$q = "SELECT * FROM users ORDER BY username ASC;";
 
-		$resultU = $conn->query($q);
-		//getting all the users from the database to check to see
-		//if the entered username and password match anyone
-		while($row = $resultU->fetch_assoc()) {
-			if($un == $row['username'] && $pw == $row['password']) {
-					$_SESSION['username'] = $un;
-				header('Location: '.BASE_URL.'/'); exit();
-			}
-		}
-		  header('Location: '.BASE_URL.'/login');
-			exit();*/
-			$pageTitle = 'Login Process';
 			$users = User::getUsers();
 			//    $u = User::loadById(1);
 			//  echo $u->username;
@@ -86,17 +95,29 @@ class SiteController {
 			foreach ($users as $user) {
 				if ( $un == $user->username && $pw == $user->password) {
 					$_SESSION['username'] = $un;
-					header('Location: '.BASE_URL.'/'); exit();
+					header('Location: '.BASE_URL.'/dashboard'); exit();
 				}
 			}
 			header('Location: '.BASE_URL.'/login'); exit();
 	}
-
+	public function dashboard() {
+		$pageTitle = 'Home';
+		$user= User::loadByUn($_SESSION['username']);
+		$followers = Followers::getFollowers($user->id);
+		//so you now have all of the people that the user follows, the name is backwards
+		//now have to get the first couple events for every follower and put them into their own
+		//little scrollable window. Or instead of every follower randomly get a few and put their
+		//first couple events in a scrollable window.
+		$uevents = UEvent::getUvents($user->id);
+		include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/dashboard.tpl';
+		include_once SYSTEM_PATH.'/view/footer.tpl';
+	}
   public function home() {
 		$pageTitle = 'Home';
 		if (isset($_SESSION['username'])) {
 			$user= User::loadByUn($_SESSION['username']);
-			echo $user->permissions;
+			//echo $user->permissions;
 		}
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/home.tpl';
@@ -107,8 +128,9 @@ class SiteController {
 			$user= User::loadByUn($_SESSION['username']);
 			echo $user->permissions;
 		}
+		$users = User::getUsers();
 		include_once SYSTEM_PATH.'/view/header.tpl';
-		include_once SYSTEM_PATH.'/view/home.tpl';
+		include_once SYSTEM_PATH.'/view/admin.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 
@@ -152,7 +174,7 @@ class SiteController {
 		//echo $user->id;
 		$userID = $user->save();
 		//echo $userID;
-		//header('Location: '.BASE_URL.'/login'); exit();
+		header('Location: '.BASE_URL.'/login'); exit();
 	}
 
 }

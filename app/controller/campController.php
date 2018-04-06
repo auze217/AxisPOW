@@ -132,7 +132,7 @@ class CampController {
     if (empty($name) || empty($state)) {
       header('Location: '.BASE_URL.'/camps/add'); exit();
     }
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+  /*  $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
     //models refused to cooperate
 		$q = sprintf("INSERT INTO `camps` (`name`, `state`, `prisoners`, `image`) VALUES
     ('%s', '%s', '%s', '%s');",
@@ -142,9 +142,14 @@ class CampController {
     $image
     );
 
-  $conn->query($q) or die('Error: '.$conn->error);
-
-    header('Location: '.BASE_URL.'/camps'); exit();
+  $conn->query($q) or die('Error: '.$conn->error);*/
+    $camp = new Camp();
+    $camp->name = $name;
+    $camp->state = $state;
+    $camp->prisoners = $prisoners;
+    $camp->image = $image;
+    $camp->save();
+    //header('Location: '.BASE_URL.'/camps'); exit();
   }
   public function view($id) {
     if (isset($_SESSION['username'])) {
@@ -170,7 +175,12 @@ class CampController {
       trigger_error('Invalid query: '.$conn->error);
     }
     $r = $result->fetch_assoc();
-    $pageTitle = $r['name'];
+/*    $r = Camp::loadById($id);
+    echo $r->name;
+    echo $r->state;
+    echo $r->prisoners;
+    echo $r->image;
+    $pageTitle = $r->name;*/
     include_once SYSTEM_PATH.'/view/header.tpl';
     include_once SYSTEM_PATH.'/view/camp.tpl';
     include_once SYSTEM_PATH.'/view/footer.tpl';

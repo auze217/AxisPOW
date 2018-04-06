@@ -1,16 +1,17 @@
 <?php
 
-class Camp {
-  const DB_TABLE = 'camps'; // database table name
+class UEvent {
+  const DB_TABLE = 'user_events'; // database table name
 
   // database fields for this table
+  //for this im think have the title for what they did but make that an a with the details
+  //being the href for what they just looked at.
   public $id = 0;
-  public $name = '';
-  public $state = '';
-  public $prisoners = '';
-  public $image = '';
-  //public $email = '';
-//  public $permissions = 0;
+  public $title = '';
+  //might possibly make it an int thats the camps id
+  public $details = '';
+  public $date_created = '';
+  public $user_id = 0;
 
 
   // return a Soldier object by ID
@@ -29,25 +30,23 @@ class Camp {
       } else {
         $row = $result->fetch_assoc(); // get results as associative array
 
-        $soldier = new Camp(); // instantiate new Soldier object
+        $soldier = new User(); // instantiate new Soldier object
 
         // store db results in local object
         $soldier->id           = $row['id'];
-        $soldier->name   = $row['name'];
-        $soldier->state    = $row['state'];
-        $soldier->prisoners         = $row['prisoners'];
-        $soldier->image = $row['image'];
-        //$soldier->email = $row['email'];
-        //$soldier->permissions = $row['permissions'];
+        $soldier->title   = $row['title'];
+        $soldier->details    = $row['details'];
+        $soldier->date_created         = $row['date_created'];
+        $soldier->user_id = $row['user_id'];
         return $soldier; // return the soldier
       }
     }
   }
-
   // return all Soldiers as an array
-  public static function getCamps() {
+  public static function getUvents($id) {
     $db = Db::instance();
-    $q = "SELECT id FROM `".self::DB_TABLE."` ORDER BY name ASC;";
+    $q = sprintf("SELECT * FROM user_events WHERE user_id = '%d';",
+      $id);
     $result = $db->query($q);
 
     $soldiers = array();
@@ -74,13 +73,13 @@ class Camp {
     // build query
 
   //  echo $this->username;
-    $q = sprintf("INSERT INTO `camps` (`id`, `name`, `state`, `prisoners`, `image`) VALUES (NULL, '$this->name', '$this->state', '$this->prisoners', '$this->image');"
+    $q = sprintf("INSERT INTO `user_events` (`id`, `title`, `details`, `date_created`, `user_id`) VALUES (NULL, '$this->title', '$this->details', '$this->date_created', '$this->user_id');"
     );
 
     //echo $q;
     $db->query($q); // execute query
     $this->id = $db->getInsertID(); // set the ID for the new object
-    echo $this->id;
+    //echo $this->id;
     return $this->id;
   }
 
@@ -91,21 +90,22 @@ class Camp {
     $db = Db::instance(); // connect to db
 
     // build query
-    $q = sprintf("UPDATE `%s` SET
-      `name` = %s,
-      `state`  = %s,
-      `prisoners` = %s,
-      'image' = %s,
-      WHERE `id` = %d;",
-      self::DB_TABLE,
-      $db->escape($this->name),
-      $db->escape($this->state),
-      $db->escape($this->prisoners),
-      $db->escape($this->image),
-      $this->id
+    $q = sprintf("UPDATE `user_events` SET `title` = '$this->title', `details` = '$this->details', `date_created` = '$this->date_created', `user_id` = '$this->user_id' WHERE `users`.`id` = $this->id;"
       );
     $db->query($q); // execute query
     return $db->id; // return this object's ID
+  }
+  public function delete() {
+    if($this->id == 0)
+      return null;
+
+      $db = Db::instance();
+      $q = sprintf("DELETE FROM user_events WHERE id='$this->id'");
+
+      $db->query($q);
+      return $this->id;
+
+
   }
 
 }

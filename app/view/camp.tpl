@@ -12,9 +12,15 @@
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
+          <?php if(isset($_SESSION['username'])): ?>
           <li class="nav-item active">
-            <a class="nav-link" href="<?= BASE_URL ?>/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?= BASE_URL ?>/dashboard">Home</a>
           </li>
+        <?php else: ?>
+          <li class="nav-item active">
+            <a class="nav-link" href="<?= BASE_URL ?>/">Home</a>
+          </li>
+        <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
           </li>
@@ -57,6 +63,7 @@
 
 
 
+
     <main role="main">
   <!--    <?php $row=$result->fetch_assoc() ?> -->
       <section class="jumbotron text-center" style="background-image: url('<?= BASE_URL ?>/public/img/<?= $r['image']?>');">
@@ -69,7 +76,7 @@
         </div>
       </section>
       <button id="addEventButton" class="btn btn-sm btn-outline-secondary"> Add Life Event </button>
-        <a href="<?=BASE_URL?>/camps/delete/process/<?= $row['id']?>" class="btn btn-sm btn-outline-secondary" style="margin-right: 50px;"> Delete Camp Entry </a>
+        <a href="<?=BASE_URL?>/camps/delete/process/<?= $r['id']?>" class="btn btn-sm btn-outline-secondary" style="margin-right: 50px;"> Delete Camp Entry </a>
       <a class="btn btn-sm btn-outline-secondary" style="float: right;" href="<?=BASE_URL?>/camps/update/<?=$r['id']?>"> Edit Camp Info</a>
       <form id="addEventForm" style="display:none;" action="<?= BASE_URL ?>/camps/event/<?= $r['id']?>" method="POST">
         <div class="mb-3">

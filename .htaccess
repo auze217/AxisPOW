@@ -14,6 +14,8 @@ RewriteRule ^logout/?$ app/controller/siteController.php?action=logout [QSA,L]
 RewriteRule ^signup/?$ app/controller/siteController.php?action=signup [QSA,L]
 RewriteRule ^signup/process?$ app/controller/siteController.php?action=signupProcess [QSA,L]
 RewriteRule ^admin/?$ app/controller/siteController.php?action=admin [QSA,L]
+RewriteRule ^permission/(\d+)/?$ app/controller/siteController.php?action=permission&id=$1 [QSA,L]
+RewriteRule ^delete/user/(\d+)/?$ app/controller/siteController.php?action=deleteUser&id=$1 [QSA,L]
 
 # member
 #RewriteRule ^member/view/(\w+)/?$ app/controller/memberController.php?action=view&id=$1 [QSA,L]
