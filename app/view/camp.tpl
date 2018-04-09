@@ -78,14 +78,14 @@
       <button id="addEventButton" class="btn btn-sm btn-outline-secondary"> Add Life Event </button>
         <a href="<?=BASE_URL?>/camps/delete/process/<?= $r['id']?>" class="btn btn-sm btn-outline-secondary" style="margin-right: 50px;"> Delete Camp Entry </a>
       <a class="btn btn-sm btn-outline-secondary" style="float: right;" href="<?=BASE_URL?>/camps/update/<?=$r['id']?>"> Edit Camp Info</a>
-      <form id="addEventForm" style="display:none;" action="<?= BASE_URL ?>/camps/event/<?= $r['id']?>" method="POST">
+      <form id="addEventForm" style="display:none;">
         <div class="mb-3">
           <label for="title">Title</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">@</span>
             </div>
-            <input type="text" class="form-control" name="title" id="title" placeholder="Title" required>
+            <input type="text" class="form-control" name="title" id="eventTitle" placeholder="Title" required>
             <div class="invalid-feedback" style="width: 100%;">
               A title is required.
             </div>
@@ -94,17 +94,19 @@
 
         <div class="mb-3">
           <label for="details">Details</label>
-           <textarea class="form-control" name="details" id="details" placeholder="Details" required></textarea>
+           <textarea class="form-control" name="details" id="eventDescription" placeholder="Details" required></textarea>
           <!--<input type="text" class="form-control" name="email" id="email" placeholder="you@example.com" required> -->
           <div class="invalid-feedback">
             Please enter a description.
           </div>
         </div>
-        <input type="submit" name="submit" value="Add" class="btn btn-sm btn-outline-secondary">
+        <input id="submitEventButton" type="button" name="submit" value="Add" class="btn btn-sm btn-outline-secondary"/>
+          <p id="pageId" style="display: none" type="hidden">
+              <?= $r['id'] ?></p> 
       </form>
       <?php while($levents = $life->fetch_assoc()): ?>
-      <div class="album py-5 bg-light">
-        <div class="container">
+      <div  class="album py-5 bg-light">
+        <div id="events" class="container">
 
           <div class="row">
             <div class="col-md-4">

@@ -18,6 +18,7 @@ $(document).ready(function(){
   });
 
 //addign new events
+    /*
   $('#submitEventButton').click(function(){
       var title = $('#eventTitle').val();
       var full = $('<h3>' + title + '</h3>');
@@ -30,16 +31,60 @@ $(document).ready(function(){
 
       $('#addEventForm').hide();
   });
+  */
     
-    /*  $('#submitEventButton').click(function(){
+     $('#submitEventButton').click(function(){
       //alert("HIT ITT");
+         
     // grab the data from the form
       
-    var title = $('#eventTitle').val();
-    var details = $('#eventDescription').val();
-    var idNum = $('#idNum').val();
-    alert(baseurl);
-    // send form data via Ajax
+    var new_title = $('#eventTitle').val();
+    var new_details = $('#eventDescription').val();
+    var new_id = $('#pageId').text().trim();
+         
+         console.log('http://' + window.location.hostname + '/camps/view/life-event/add/process/' + new_id);
+
+         // send form data via Ajax
+    $.post(
+       
+        'http://' + window.location.hostname + '/tester/camps/view/life-event/add/process/' + new_id,
+        {
+            title: new_title,
+            details: new_details
+        },
+        function(data){
+            var fullTitle = $('<p class="card-text"><strong>' +  new_title + '</p>');
+          var fullDetails = $('<p class="details">' + new_details + '</p>');
+            /*var fullDetails = $('<div id="events" class="album py-5 bg-light">
+        <div class="container">
+            
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+
+                <div class="card-body">
+                  <p class="card-text"><strong> '+ new_title +'</strong> </p>
+                  <p class="card-text">'+ new_details +'</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>');
+      */
+
+          // add new content to events list
+          $('#events').append(fullTitle).append(fullDetails);
+            
+        });
+        /* 
     $.post(
       baseurl+'camps/view/life-event/add/process/' + idNum,
       {
@@ -68,8 +113,9 @@ $(document).ready(function(){
         // the Ajax call failed
         alert("Ajax call failed");
       });
+      */
         
-  });*/
+  });
 
 
 //adding parents to the parent box
