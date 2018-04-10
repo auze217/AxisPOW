@@ -4,7 +4,6 @@ include_once '../global.php';
 
 //get identifier for the page we want
 $action = $_GET['action'];
-
 //instantiate a campController and route it
 $cc = new CampController();
 $cc->route($action);
@@ -13,6 +12,7 @@ class CampController {
   public function route($action) {
     switch($action) {
     case 'index':
+
       $this->index();
       break;
     case 'add':
@@ -23,6 +23,7 @@ class CampController {
       break;
     case 'view':
       $id = $_GET['id'];
+
       $this->view($id);
       break;
     case 'update':
@@ -37,25 +38,18 @@ class CampController {
       $id = $_GET['id'];
       $this->deleteProcess($id);
       break;
-    case 'camp':
-    //this is just a test case
-    $this->camp();
-    break;
     case 'updateProcess':
-    $id = $_GET['id'];
-    $this->updateProcess($id);
-    break;
+      $id = $_GET['id'];
+      $this->updateProcess($id);
+      break;
     case 'addLifeEventProcess':
-            $id = $_GET['id'];
-            $this->addLifeEventProcess($id);
-            break;
+        $id = $_GET['id'];
+        $this->addLifeEventProcess($id);
+        break;
+
     }
   }
-
-public function addLifeEventProcess($id) {
-
-
-
+    public function addLifeEventProcess($id) {
 		$title = $_POST['title'];
 		$details = $_POST['details'];
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
@@ -74,13 +68,14 @@ public function addLifeEventProcess($id) {
     if(!$life) {
       trigger_error('Invalid query: '.$conn->error);
     }
+
 	}
   public function index() {
     if (isset($_SESSION['username'])) {
       $user= User::loadByUn($_SESSION['username']);
     }
-    //  $camps = Camp::getCamps();
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE)or die('Error: '.$conn->connect_error);
+  //  $camps = Camp::getCamps();
+  $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE)or die('Error: '.$conn->connect_error);
       //getting all the characters from the database
       $q = "SELECT * FROM camps ORDER BY name ASC;";
       $result = $conn->query($q);
@@ -97,9 +92,7 @@ public function addLifeEventProcess($id) {
       $user= User::loadByUn($_SESSION['username']);
     }
     $pageTitle = "Add Camp";
-    include_once SYSTEM_PATH.'/view/header.tpl';
   	include_once SYSTEM_PATH.'/view/add.tpl';
-  	include_once SYSTEM_PATH.'/view/footer.tpl';
   }
   public function addProcess() {
     $name = $_POST['camp_name'];
@@ -201,10 +194,13 @@ public function addLifeEventProcess($id) {
     $conn->query($q) or die('Error: '.$conn->error);
 		header('Location: '.BASE_URL.'/camps/view/'.$id); exit();
   }
-  
+
   public function deleteProcess($id) {
     if(!isset($_SESSION['username'])){
       header('Location: '.BASE_URL.'/login'); exit();
+    }
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
     }
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
 

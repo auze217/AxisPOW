@@ -32,22 +32,22 @@ $(document).ready(function(){
       $('#addEventForm').hide();
   });
   */
-    
+
      $('#submitEventButton').click(function(){
       //alert("HIT ITT");
-         
+
     // grab the data from the form
-      
+
     var new_title = $('#eventTitle').val();
     var new_details = $('#eventDescription').val();
     var new_id = $('#pageId').text().trim();
-         
-         console.log('http://' + window.location.hostname + '/camps/view/life-event/add/process/' + new_id);
+
+         console.log('http://' + window.location.hostname + '/AxisPOW/camps/view/life-event/add/process/' + new_id);
 
          // send form data via Ajax
     $.post(
-       
-        'http://' + window.location.hostname + '/tester/camps/view/life-event/add/process/' + new_id,
+
+        'http://' + window.location.hostname + '/AxisPOW/camps/view/life-event/add/process/' + new_id,
         {
             title: new_title,
             details: new_details
@@ -57,7 +57,7 @@ $(document).ready(function(){
           var fullDetails = $('<p class="details">' + new_details + '</p>');
             /*var fullDetails = $('<div id="events" class="album py-5 bg-light">
         <div class="container">
-            
+
           <div class="row">
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
@@ -82,9 +82,9 @@ $(document).ready(function(){
 
           // add new content to events list
           $('#events').append(fullTitle).append(fullDetails);
-            
+
         });
-        /* 
+        /*
     $.post(
       baseurl+'camps/view/life-event/add/process/' + idNum,
       {
@@ -114,7 +114,7 @@ $(document).ready(function(){
         alert("Ajax call failed");
       });
       */
-        
+
   });
 
 

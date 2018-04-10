@@ -6,7 +6,7 @@ RewriteEngine on
 
 #normal actions
 RewriteRule ^$ app/controller/siteController.php?action=home [QSA,L]
-RewriteRule ^characterDatabase/?$ app/controller/siteController.php?action=database [QSA,L]
+#RewriteRule ^characterDatabase/?$ app/controller/siteController.php?action=database [QSA,L]
 RewriteRule ^login/?$ app/controller/siteController.php?action=login [QSA,L]
 RewriteRule ^dashboard/?$ app/controller/siteController.php?action=dashboard [QSA,L]
 RewriteRule ^login/process?$ app/controller/siteController.php?action=loginProcess [QSA,L]
@@ -38,3 +38,4 @@ RewriteRule ^camps/delete/(\d+)/?$ app/controller/campController.php?action=dele
 RewriteRule ^camps/delete/process/(\d+)/?$ app/controller/campController.php?action=deleteProcess&id=$1 [QSA,L]
 RewriteRule ^camps/camp/?$ app/controller/campController.php?action=camp [QSA,L]
 RewriteRule ^camps/event/(\d+)/?$ app/controller/campController.php?action=event&id=$1 [QSA,L]
+RewriteRule ^camps/view/life-event/add/process/(\d+)/?$ app/controller/campController.php?action=addLifeEventProcess&id=$1 [QSA,L]

@@ -11,11 +11,17 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
+        <?php if(isset($_SESSION['username'])): ?>
+        <li class="nav-item active">
+          <a class="nav-link" href="<?= BASE_URL ?>/dashboard">Home</a>
+        </li>
+      <?php else: ?>
         <li class="nav-item active">
           <a class="nav-link" href="<?= BASE_URL ?>/">Home</a>
         </li>
+      <?php endif; ?>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Profile</a>
@@ -29,6 +35,13 @@
           <a class="nav-link" href="<?= BASE_URL ?>/login">Login</a>
         </li>
         <?php endif; ?>
+        <?php if(isset($_SESSION['username']) && $user->permissions == 1): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= BASE_URL ?>/admin">Admin</a>
+        </li>
+      <?php endif; ?>
+
+        <!--need to have an admin page for if the logged in user is an admin -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -48,9 +61,12 @@
 
 
 
+
+
+
 <div class="container">
   <div class="py-5 text-center">
-    <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <img class="d-block mx-auto mb-4" src="<?= BASE_URL?>/public/img/logo.jpg" alt="" width="72" height="72">
     <h2>Update a POW Camp</h2>
     <p class="lead">If you want to update a camp enter its information here.</p>
   </div>

@@ -102,10 +102,10 @@
         </div>
         <input id="submitEventButton" type="button" name="submit" value="Add" class="btn btn-sm btn-outline-secondary"/>
           <p id="pageId" style="display: none" type="hidden">
-              <?= $r['id'] ?></p> 
+            <?= $r['id'] ?></p>
       </form>
       <?php while($levents = $life->fetch_assoc()): ?>
-      <div  class="album py-5 bg-light">
+      <div class="album py-5 bg-light">
         <div id="events" class="container">
 
           <div class="row">
