@@ -47,7 +47,7 @@ $(document).ready(function(){
          // send form data via Ajax
     $.post(
 
-        'http://' + window.location.hostname + '/AxisPOW/camps/view/life-event/add/process/' + new_id,
+        'http://' + window.location.hostname + '/testing/camps/view/life-event/add/process/' + new_id,
         {
             title: new_title,
             details: new_details
