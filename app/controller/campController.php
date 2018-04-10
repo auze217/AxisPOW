@@ -51,11 +51,11 @@ class CampController {
             break;
     }
   }
-    
+
 public function addLifeEventProcess($id) {
-    
-    
-    
+
+
+
 		$title = $_POST['title'];
 		$details = $_POST['details'];
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
@@ -67,46 +67,20 @@ public function addLifeEventProcess($id) {
         if(!$result) {
       trigger_error('Invalid query: '.$conn->error);
     }
-    
+
     $sql = sprintf("SELECT * FROM life_event WHERE camp_id = '%d';",
       $id);
     $life = $conn->query($sql);
     if(!$life) {
       trigger_error('Invalid query: '.$conn->error);
     }
-   // $r = $result->fetch_assoc();
-//    $pageTitle = $r['name'];
-//    include_once SYSTEM_PATH.'/view/header.tpl';
-//    include_once SYSTEM_PATH.'/view/camp.tpl';
-//    include_once SYSTEM_PATH.'/view/footer.tpl';
-    
-    
-    //header('Location: '.BASE_URL.'/camps/view/'.$id); exit();
-	
-    
-    //	if($le->id != 0) {
-			//$json = array(
-			//	'success' => 'success',
-			//	'life_event_id' => $soldierID
-			//);
-		//} else {
-	//		$json = array('error' => 'Could not save life event.');
-	//	}
-
-	//	header('Content-Type: application/json'); // let client know it's Ajax
-	//	echo json_encode($json); // print the JSON
-
 	}
-    
-  public function camp() {
-    $pageTitle = 'Camp Aliceville';
-    include_once SYSTEM_PATH.'/view/header.tpl';
-    include_once SYSTEM_PATH.'/view/camp.tpl';
-    include_once SYSTEM_PATH.'/view/footer.tpl';
-  }
   public function index() {
-  //  $camps = Camp::getCamps();
-  $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE)or die('Error: '.$conn->connect_error);
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
+    }
+    //  $camps = Camp::getCamps();
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE)or die('Error: '.$conn->connect_error);
       //getting all the characters from the database
       $q = "SELECT * FROM camps ORDER BY name ASC;";
       $result = $conn->query($q);
@@ -118,6 +92,9 @@ public function addLifeEventProcess($id) {
   public function add() {
     if(!isset($_SESSION['username'])){
       header('Location: '.BASE_URL.'/login'); exit();
+    }
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
     }
     $pageTitle = "Add Camp";
     include_once SYSTEM_PATH.'/view/header.tpl';
@@ -133,21 +110,18 @@ public function addLifeEventProcess($id) {
     if (empty($name) || empty($state)) {
       header('Location: '.BASE_URL.'/camps/add'); exit();
     }
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
-    //models refused to cooperate
-		$q = sprintf("INSERT INTO `camps` (`name`, `state`, `prisoners`, `image`) VALUES
-    ('%s', '%s', '%s', '%s');",
-    $name,
-    $state,
-    $prisoners,
-    $image
-    );
-
-  $conn->query($q) or die('Error: '.$conn->error);
-
+    $camp = new Camp();
+    $camp->name = $name;
+    $camp->state = $state;
+    $camp->prisoners = $prisoners;
+    $camp->image = $image;
+    $camp->save();
     header('Location: '.BASE_URL.'/camps'); exit();
   }
   public function view($id) {
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
+    }
     //connecting to the database
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
     $q = sprintf("SELECT * FROM camps WHERE id = '%d';",
@@ -176,6 +150,9 @@ public function addLifeEventProcess($id) {
   public function update($id) {
     if(!isset($_SESSION['username'])){
       header('Location: '.BASE_URL.'/login'); exit();
+    }
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
     }
     $pageTitle="Update";
     //connecting to the database
@@ -222,19 +199,9 @@ public function addLifeEventProcess($id) {
       $image = $row['image'];
     $q = sprintf("UPDATE camps SET name='$name', state='$state', prisoners='$prisoners', image='$image' WHERE id='$id';");
     $conn->query($q) or die('Error: '.$conn->error);
-	//	$id = $camp->save();
 		header('Location: '.BASE_URL.'/camps/view/'.$id); exit();
   }
-  public function delete($id) {
-    if(!isset($_SESSION['username'])){
-      header('Location: '.BASE_URL.'/login'); exit();
-    }
-    $camp = Camp::loadById($id);
-    $pageTitle = 'Delete'.$camp->name;
-    include_once SYSTEM_PATH.'/view/header.tpl';
-    include_once SYSTEM_PATH.'/view/delete.tpl';
-    include_once SYSTEM_PATH.'/view/footer.tpl';
-  }
+  
   public function deleteProcess($id) {
     if(!isset($_SESSION['username'])){
       header('Location: '.BASE_URL.'/login'); exit();
