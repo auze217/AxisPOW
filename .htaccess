@@ -16,6 +16,7 @@ RewriteRule ^signup/process?$ app/controller/siteController.php?action=signupPro
 RewriteRule ^admin/?$ app/controller/siteController.php?action=admin [QSA,L]
 RewriteRule ^permission/(\d+)/?$ app/controller/siteController.php?action=permission&id=$1 [QSA,L]
 RewriteRule ^delete/user/(\d+)/?$ app/controller/siteController.php?action=deleteUser&id=$1 [QSA,L]
+RewriteRule ^signup/add/process/check/?$ app/controller/siteController.php?action=checkUsername [QSA,L]
 
 # member
 #RewriteRule ^member/view/(\w+)/?$ app/controller/memberController.php?action=view&id=$1 [QSA,L]

@@ -57,6 +57,11 @@ class SiteController {
 				$id = $_GET['id'];
 				$this->permission($id);
 				break;
+            case 'checkUsername':
+                //echo("please");
+                //$this->login();
+                $this->checkUsername();
+                break;
 
 		}
 
@@ -185,6 +190,29 @@ class SiteController {
 		$userID = $user->save();
 		//echo $userID;
 		header('Location: '.BASE_URL.'/login'); exit();
+	}
+    
+    public function checkUsername() {
+        
+		$username = $_GET['firstName'];
+        
+        
+        $json = array(
+				'success' => 'success'
+			);
+        
+        $users = User::getUsers();
+		foreach($users as $u) {
+			if ($u->username == $username) {
+				$json = array(
+				'success' => 'fail',
+			    );
+			}
+		}
+			
+		header('Content-Type: application/json'); // let client know it's Ajax
+		echo json_encode($json); // print the JSON
+
 	}
 
 }
