@@ -149,6 +149,10 @@ class SiteController {
 
 	public function signup() {
 		$pageTitle = 'Sign Up';
+        if (isset($_SESSION['username'])) {
+			$user= User::loadByUn($_SESSION['username']);
+			//echo $user->permissions;
+		}
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/signup.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
@@ -194,8 +198,8 @@ class SiteController {
     
     public function checkUsername() {
         
-		$username = $_GET['firstName'];
-        
+		$username = $_GET['username'];
+       // echo $username;
         
         $json = array(
 				'success' => 'success'
@@ -203,6 +207,7 @@ class SiteController {
         
         $users = User::getUsers();
 		foreach($users as $u) {
+            
 			if ($u->username == $username) {
 				$json = array(
 				'success' => 'fail',

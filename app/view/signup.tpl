@@ -104,7 +104,7 @@
               </div>
             </div>
 
-            <div class="mb-3">
+            <div id="user" class="mb-3">
               <label for="username">Username</label>
               <div class="input-group">
                 <div class="input-group-prepend">

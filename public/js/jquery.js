@@ -180,31 +180,31 @@ $(document).ready(function(){
   });
 
   }
-    $('#firstName').blur(function() {
+    $('#username').blur(function() {
         
-        var username = $('#firstName').val().toLowerCase();
+        var username = $('#username').val();
         //alert(username);
         console.log(window.location.href + '/add/process/check/');
         $.get(
        window.location.href + '/add/process/check/',
       {
-        firstName: username
+        username: username
       },
       function(data){
         if(data.success == 'success') {
-            alert('made it to success');
+            //alert('made it to success');
           //this is where everything is fine
         } else {
             //alert("made to 2nd area");
           // server data wasn't saved successfully
           //alert('Server error: ' + data.error);
-            $('#signupCont').prepend("Username taken please change");
+            $('#user').append("Username taken please change");
         }
       })
       .fail(function(){
             //alert("made to 3rd area");
         // the Ajax call failed
-        $('#signupCont').prepend("ajax call failed");
+        $('#user').append("ajax call failed");
       });
     })
   });
