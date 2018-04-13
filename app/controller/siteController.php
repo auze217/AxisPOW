@@ -57,14 +57,58 @@ class SiteController {
 				$id = $_GET['id'];
 				$this->permission($id);
 				break;
-            case 'checkUsername':
-                //echo("please");
-                //$this->login();
-                $this->checkUsername();
-                break;
+      case 'checkUsername':
+      	//$this->login();
+      	$this->checkUsername();
+        break;
+			case 'profile':
+				//$id = $_GET('id');
+				$this->profile();
+				break;
+			case 'followerProfile':
+				$id = $_GET['id'];
+				$this->followerProfile($id);
+				break;
+			case 'followAdd':
+				$id = $_GET['id'];
+				$this->followAdd($id);
+				break;
+			case 'followDelete':
+				$id = $_GET['id'];
+				$this->followDelete($id);
+				break;
 
 		}
 
+	}
+	public function followAdd($id) {
+
+	}
+	public function followDelete($id) {
+		$user = User::loadByUn($_SESSION['username']);
+		$follow = Followers::loadById($id, $user->id);
+		$follow->delete();
+		header('Location: '.BASE_URL.'/profile/<?= $user->id ?>'); exit();
+	}
+	public function followerProfile($id) {
+		$user = User::loadById($id);
+		//echo $user->firstname;
+		$pageTitle = $user->username;
+		$uevents = UEvent::getUvents($user->id);
+		$followers = Followers::getFollowers($user->id);
+		include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/followp.tpl';
+		include_once SYSTEM_PATH.'/view/footer.tpl';
+	}
+	public function profile() {
+		$user = User::loadByUn($_SESSION['username']);
+		//echo $user->firstname;
+		$pageTitle = $user->username;
+		$uevents = UEvent::getUvents($user->id);
+		$followers = Followers::getFollowers($user->id);
+		include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/profile.tpl';
+		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 	public function deleteUser($id) {
 		$pageTitle = 'deleteUser';
@@ -120,10 +164,6 @@ class SiteController {
 	}
   public function home() {
 		$pageTitle = 'Home';
-		if (isset($_SESSION['username'])) {
-			$user= User::loadByUn($_SESSION['username']);
-			//echo $user->permissions;
-		}
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/home.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
@@ -195,26 +235,26 @@ class SiteController {
 		//echo $userID;
 		header('Location: '.BASE_URL.'/login'); exit();
 	}
-    
+
     public function checkUsername() {
-        
+
 		$username = $_GET['username'];
        // echo $username;
-        
+
         $json = array(
 				'success' => 'success'
 			);
-        
+
         $users = User::getUsers();
 		foreach($users as $u) {
-            
+
 			if ($u->username == $username) {
 				$json = array(
 				'success' => 'fail',
 			    );
 			}
 		}
-			
+
 		header('Content-Type: application/json'); // let client know it's Ajax
 		echo json_encode($json); // print the JSON
 

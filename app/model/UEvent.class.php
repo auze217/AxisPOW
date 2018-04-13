@@ -18,7 +18,7 @@ class UEvent {
   public static function loadById($id) {
       $db = Db::instance(); // create db connection
       // build query
-      $q = sprintf("SELECT * FROM `%s` WHERE id = %d;",
+      $q = sprintf("SELECT * FROM `%s` WHERE user_id = %d;",
         self::DB_TABLE,
         $id
         );

@@ -12,12 +12,13 @@ class Followers {
 
   //dont think we need this function
   // return a Soldier object by ID
-  public static function loadById($id) {
+  public static function loadById($followerID, $followeeID) {
       $db = Db::instance(); // create db connection
       // build query
-      $q = sprintf("SELECT * FROM `%s` WHERE user_id = %d;",
+      $q = sprintf("SELECT * FROM `%s` WHERE follower_id = %d AND user_id = %d;",
         self::DB_TABLE,
-        $id
+        $followerID,
+        $followeeID
         );
       $result = $db->query($q); // execute query
       // make sure we found something
@@ -37,6 +38,22 @@ class Followers {
         $soldier->follower_id         = $row['follower_id'];
         return $soldier; // return the soldier
       }
+    }
+  }
+  public static function isFollower($followerID, $followeeID) {
+    $db = Db::instance(); // create db connection
+    // build query
+    $q = sprintf("SELECT id FROM `%s` WHERE follower_id = %d AND user_id = %d;",
+      self::DB_TABLE,
+      $followerID,
+      $followeeID
+      );
+    $result = $db->query($q); // execute query
+    // make sure we found something
+    if($result->num_rows == 0) {
+      return false; // not following
+    } else {
+      return true; // is following
     }
   }
 

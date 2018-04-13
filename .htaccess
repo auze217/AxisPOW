@@ -17,6 +17,10 @@ RewriteRule ^admin/?$ app/controller/siteController.php?action=admin [QSA,L]
 RewriteRule ^permission/(\d+)/?$ app/controller/siteController.php?action=permission&id=$1 [QSA,L]
 RewriteRule ^delete/user/(\d+)/?$ app/controller/siteController.php?action=deleteUser&id=$1 [QSA,L]
 RewriteRule ^signup/add/process/check/?$ app/controller/siteController.php?action=checkUsername [QSA,L]
+RewriteRule ^profile/(\d+)/?$ app/controller/siteController.php?action=profile&id=$1 [QSA,L]
+RewriteRule ^follower/profile/(\d+)/?$ app/controller/siteController.php?action=followerProfile&id=$1 [QSA,L]
+RewriteRule ^follow/add/(\d+)/?$ app/controller/siteController.php?action=followAdd&id=$1 [QSA,L]
+RewriteRule ^follow/delete/(\d+)/?$ app/controller/siteController.php?action=followDelete&id=$1 [QSA,L]
 
 # member
 #RewriteRule ^member/view/(\w+)/?$ app/controller/memberController.php?action=view&id=$1 [QSA,L]

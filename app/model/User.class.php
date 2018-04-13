@@ -11,6 +11,7 @@ class User {
   public $lastname = '';
   public $email = '';
   public $permissions = 0;
+  public $image = '';
 
 
   // return a Soldier object by ID
@@ -39,6 +40,7 @@ class User {
         $soldier->lastname = $row['last_name'];
         $soldier->email = $row['email'];
         $soldier->permissions = $row['permissions'];
+        $soldier->image = $row['image'];
         return $soldier; // return the soldier
       }
     }
@@ -67,6 +69,7 @@ class User {
         $soldier->lastname         = $row['last_name'];
         $soldier->email          = $row['email'];
         $soldier->permissions = $row['permissions'];
+        $soldier->image = $row['image'];
         return $soldier; // return the soldier
       }
     }
@@ -102,7 +105,7 @@ class User {
     // build query
 
   //  echo $this->username;
-    $q = sprintf("INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `permissions`) VALUES (NULL, '$this->firstname', '$this->lastname', '$this->username', '$this->password', '$this->email', '$this->permissions');"
+    $q = sprintf("INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `permissions`, 'image') VALUES (NULL, '$this->firstname', '$this->lastname', '$this->username', '$this->password', '$this->email', '$this->permissions', '$this->image');"
     );
 
     //echo $q;
@@ -119,7 +122,7 @@ class User {
     $db = Db::instance(); // connect to db
 
     // build query
-    $q = sprintf("UPDATE `users` SET `first_name` = '$this->firstname', `last_name` = '$this->lastname', `username` = '$this->username', `password` = '$this->password', `email` = '$this->email', `permissions` = '$this->permissions' WHERE `users`.`id` = $this->id;"
+    $q = sprintf("UPDATE `users` SET `first_name` = '$this->firstname', `last_name` = '$this->lastname', `username` = '$this->username', `password` = '$this->password', `email` = '$this->email', `permissions` = '$this->permissions', `image` = '$this->image' WHERE `users`.`id` = $this->id;"
       );
     $db->query($q); // execute query
     return $db->id; // return this object's ID
