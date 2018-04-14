@@ -279,9 +279,18 @@ class SiteController {
 		$user->firstname = $fn;
 		$user->lastname = $ln;
 		$user->email = $em;
-		//$user->permissions = 0;
+		$user->permissions = 0;
 		//echo $user->id;
 		$userID = $user->save();
+        
+        $userEvent = new UEvent();
+        $userEvent->title = 'Made an account';
+        $userEvent->details = 1;
+        $userEvent->date_created = '2018-04-13';
+        $userEvent->user_id = $user->id;
+        $userEvent->insert();
+        $userEvent->save();
+        $userEvent->update();
 		//echo $userID;
 		header('Location: '.BASE_URL.'/login'); exit();
 	}

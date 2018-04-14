@@ -26,7 +26,7 @@
           </li>
           <?php if(isset($_SESSION['username'])): ?>
           <li class="nav-item">
-            <a class="nav-link" href="<?= BASE_URL ?>/profile/<? = $user->id ?>">Profile</a>
+            <a class="nav-link" href="<?= BASE_URL ?>/profile/<?= $user->id ?>">Profile</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASE_URL ?>/logout">(<?=$_SESSION['username']?>)Logout</a>

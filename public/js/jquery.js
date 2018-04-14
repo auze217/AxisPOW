@@ -47,7 +47,7 @@ $(document).ready(function(){
          // send form data via Ajax
     $.post(
 
-        'http://' + window.location.hostname + '/testing/camps/view/life-event/add/process/' + new_id,
+        'http://' + window.location.hostname + '/tester/camps/view/life-event/add/process/' + new_id,
         {
             title: new_title,
             details: new_details
@@ -198,13 +198,13 @@ $(document).ready(function(){
             //alert("made to 2nd area");
           // server data wasn't saved successfully
           //alert('Server error: ' + data.error);
-            $('#user').append("Username taken please change");
+            $('#user').append("Username taken please change ");
         }
       })
       .fail(function(){
             //alert("made to 3rd area");
         // the Ajax call failed
-        $('#user').append("ajax call failed");
+        $('#user').append("ajax call failed ");
       });
     })
   });
