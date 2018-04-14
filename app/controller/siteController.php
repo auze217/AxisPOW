@@ -105,7 +105,6 @@ class SiteController {
 		$user = User::loadById($id);
 		$firstname = $_POST['first_name'];
 		$lastname = $_POST['last_name'];
-		$username = $_POST['username'];
 		$password = $_POST['password'];
 		$email = $_POST['email'];
 		$image = $_POST['image'];
@@ -132,13 +131,33 @@ class SiteController {
 		header('Location: '.BASE_URL.'/profile/'.$user->id); exit();
 	}
 	public function followAdd($id) {
+		$follower_id = $_SESSION['username'];
+		$follower = User::loadByUn($_SESSION['username']);
+		$followee = User::loadById($id);
 
+		$followeeID = $followee->id;
+
+		$soldier = new Followers();
+		$soldier->user_id = $follower->id;
+		$soldier->follower_id = $followee->id;
+		$soldier->username =$follower->username;
+		$soldier->follower = $followee->username;
+		$soldier->save();
+
+		//$json = array(
+		//	'success' => '
+		//	'follow_id' => $fo->id
+		// )
+
+		header('Location: '.BASE_URL.'/profile/'.$follower->id); exit();
 	}
 	public function followDelete($id) {
 		$user = User::loadByUn($_SESSION['username']);
+		
 		$follow = Followers::loadById($id, $user->id);
 		$follow->delete();
-		header('Location: '.BASE_URL.'/profile/<?= $user->id ?>'); exit();
+		
+		header('Location: '.BASE_URL.'/profile/'.$user->id); exit();
 	}
 	public function followerProfile($id) {
 		$user = User::loadById($id);

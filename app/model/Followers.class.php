@@ -28,7 +28,7 @@ class Followers {
       } else {
         $row = $result->fetch_assoc(); // get results as associative array
 
-        $soldier = new User(); // instantiate new Soldier object
+        $soldier = new Followers(); // instantiate new Soldier object
 
         // store db results in local object
         $soldier->id = $row['id'];

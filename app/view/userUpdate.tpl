@@ -92,16 +92,6 @@
               </div>
             </div>
 
-            <div id="user" class="mb-3">
-              <label for="username">Username</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>
-                <input type="text" class="form-control" name="user" id="user" placeholder="Username">
-              </div>
-            </div>
-
             <div class="mb-3">
               <label for="email">Email</label>
               <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com">
