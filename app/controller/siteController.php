@@ -217,7 +217,7 @@ class SiteController {
 		$users = User::getUsers();
 		foreach($users as $u) {
 			if ($u->username == $un) {
-				echo '<script language="javascript">';
+				echo '<script language="javascrip/followt">';
 				echo 'alert("Username already exists.")';
 				echo '</script>';
 				header('Location: '.BASE_URL.'/signup'); exit();
@@ -229,15 +229,31 @@ class SiteController {
 		$user->firstname = $fn;
 		$user->lastname = $ln;
 		$user->email = $em;
-		//$user->permissions = 0;
+		$user->permissions = 0;
+        echo ($un);
+        echo ($pw);
+        echo ($fn);
+        echo ($ln);
+        echo ($em);
 		//echo $user->id;
+        //$user->insert();
 		$userID = $user->save();
+        
+        $userEvent = new UEvent();
+        $userEvent->title = 'Made an account';
+        $userEvent->details = 1;
+        $userEvent->date_created = '2018-04-13';
+        $userEvent->user_id = $user->id;
+        $userEvent->insert();
+        $userEvent->save();
+        $userEvent->update();
+        
 		//echo $userID;
 		header('Location: '.BASE_URL.'/login'); exit();
 	}
 
     public function checkUsername() {
-
+        //echo('PLLLLLLLLLLLLLLLLLLLLLLLLLLL');
 		$username = $_GET['username'];
        // echo $username;
 
