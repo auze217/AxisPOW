@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2018 at 10:58 PM
+-- Generation Time: Apr 14, 2018 at 05:47 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -42,7 +42,8 @@ CREATE TABLE `camps` (
 
 INSERT INTO `camps` (`id`, `name`, `state`, `prisoners`, `image`) VALUES
 (1, 'Camp Aliceville', 'Alabama', 6000, 'aliceville.jpg'),
-(2, 'Camp Atterberry', 'Oklahoma', 13500, '');
+(2, 'Camp Atterberry', 'Oklahoma', 13500, ''),
+(3, 'camp shanes dick', 'Ohio', 43, '');
 
 -- --------------------------------------------------------
 
@@ -63,12 +64,7 @@ CREATE TABLE `life_event` (
 --
 
 INSERT INTO `life_event` (`id`, `title`, `details`, `image`, `camp_id`) VALUES
-(1, 'Test Event', 'Nothing Happened Just testing bruh', '', 1),
-(3, 'Conners', 'Gay', '', 2),
-(4, 'Conners', 'Gay', '', 2),
-(5, 'Conners', 'Gay', '', 2),
-(6, 'Conners', 'Gay', '', 2),
-(7, 'Conners', 'Gay', '', 2);
+(1, 'Test Event', 'Nothing Happened Just testing bruh', '', 1);
 
 -- --------------------------------------------------------
 
@@ -83,6 +79,7 @@ CREATE TABLE `users` (
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `gender` varchar(100) NOT NULL,
   `permissions` int(11) NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -91,11 +88,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `permissions`, `image`) VALUES
-(1, 'Austin', 'Zensen', 'auze217', 'lmao', 'auze217@vt.edu', 1, 'auze217.jpg'),
-(2, 'Conner', 'Caprio', 'caprioc', 'lmao', 'caprioc@vt.edu', 1, 'caprioc.jpg'),
-(3, 'Shane', 'Burchard', 'sbbmain', 'lmao', 'sbbmain@vt.edu', 0, ''),
-(4, 'rykley', 'cooper', 'rybikes', 'bikes', 'rybikes@gmail.com', 0, '');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `gender`, `permissions`, `image`) VALUES
+(1, 'Austin', 'Zensen', 'auze217', 'lmao', 'auze217@vt.edu', 'Male', 1, 'auze217.jpg'),
+(2, 'Conner', 'Caprio', 'caprioc', 'lmao', 'caprioc@vt.edu', '', 1, 'caprioc.jpg'),
+(3, 'Shane', 'Burchard', 'sbbmain', 'lmao', 'sbbmain@vt.edu', '', 0, ''),
+(4, 'rykley', 'cooper', 'rybikes', 'bikes', 'rybikes@gmail.com', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -116,8 +113,10 @@ CREATE TABLE `user_events` (
 --
 
 INSERT INTO `user_events` (`id`, `title`, `details`, `date_created`, `user_id`) VALUES
-(1, 'Looked at Camp Alliceville', 1, '2018-04-05', 1),
-(2, 'Visited Camp Aliceville', 1, '2018-04-10', 2);
+(1, 'Visited Camp Aliceville', 1, '2018-04-05', 1),
+(2, 'Visited Camp Aliceville', 1, '2018-04-10', 2),
+(3, 'Visited Camp Aliceville', 1, '2018-04-13', 3),
+(4, 'Made an account', 1, '2018-04-14', 4);
 
 -- --------------------------------------------------------
 
@@ -138,7 +137,8 @@ CREATE TABLE `user_followers` (
 --
 
 INSERT INTO `user_followers` (`id`, `user_id`, `username`, `follower`, `follower_id`) VALUES
-(1, 1, 'auze217', 'caprio', 2);
+(1, 1, 'auze217', 'caprio', 2),
+(2, 1, 'auze217', 'sbbmain', 3);
 
 --
 -- Indexes for dumped tables
@@ -182,31 +182,31 @@ ALTER TABLE `user_followers`
 -- AUTO_INCREMENT for table `camps`
 --
 ALTER TABLE `camps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `life_event`
 --
 ALTER TABLE `life_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user_events`
 --
 ALTER TABLE `user_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `user_followers`
 --
 ALTER TABLE `user_followers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

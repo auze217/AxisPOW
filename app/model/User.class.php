@@ -12,6 +12,7 @@ class User {
   public $email = '';
   public $permissions = 0;
   public $image = '';
+  public $gender = 'Male';
 
 
   // return a Soldier object by ID
@@ -41,6 +42,7 @@ class User {
         $soldier->email = $row['email'];
         $soldier->permissions = $row['permissions'];
         $soldier->image = $row['image'];
+          $soldier->gender = $row['gender'];
         return $soldier; // return the soldier
       }
     }
@@ -105,7 +107,7 @@ class User {
     // build query
 
   //  echo $this->username;
-    $q = sprintf("INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `permissions`, `image`) VALUES (NULL, '$this->firstname', '$this->lastname', '$this->username', '$this->password', '$this->email', '$this->permissions', '$this->image');"
+    $q = sprintf("INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `permissions`, `image`, `gender`) VALUES (NULL, '$this->firstname', '$this->lastname', '$this->username', '$this->password', '$this->email', '$this->permissions', '$this->image', '$this->gender');"
     );
 
     //echo $q;
@@ -122,7 +124,7 @@ class User {
     $db = Db::instance(); // connect to db
 
     // build query
-    $q = sprintf("UPDATE `users` SET `first_name` = '$this->firstname', `last_name` = '$this->lastname', `username` = '$this->username', `password` = '$this->password', `email` = '$this->email', `permissions` = '$this->permissions', `image` = '$this->image' WHERE `users`.`id` = $this->id;"
+    $q = sprintf("UPDATE `users` SET `first_name` = '$this->firstname', `last_name` = '$this->lastname', `username` = '$this->username', `password` = '$this->password', `email` = '$this->email', `permissions` = '$this->permissions', `image` = '$this->image', `gender` = '$this->gender' WHERE `users`.`id` = $this->id;"
       );
     $db->query($q); // execute query
     return $db->id; // return this object's ID

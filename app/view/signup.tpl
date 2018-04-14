@@ -131,6 +131,16 @@
                 </div>
               </div>
             </div>
+              
+            <div class="mb-3">
+              <label for="gender">Gender</label>
+              <input type="radio" class="form-control" name="gender" id="gender" value="Male" required>Male<br />
+              <input type="radio" class="form-control" name="gender" id="gender" value="Female" required>Female<br />
+              <input type="radio" class="form-control" name="gender" id="gender" value="Other" required>Other<br />
+              <div class="invalid-feedback">
+                Please pick one.
+              </div>
+            </div>
 
             <hr class="mb-4">
             <button class="btn btn-primary btn-lg btn-block" name="submit" type="submit">Sign Up</button>

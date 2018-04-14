@@ -101,6 +101,7 @@ if(isset($_SESSION['username'])):
             <div class="card-body">
               <p class="card-text"><strong> Username:</strong> <?= $user->username ?> </p>
               <p class="card-text"><strong> Email:</strong> <?= $user->email ?></p>
+                <p class="card-text"><strong>Gender:</strong><?= $user->gender ?></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a class="btn btn-primary" href="<?= BASE_URL ?>/update/<?= $user->id ?>">Edit</a>

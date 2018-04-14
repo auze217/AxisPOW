@@ -38,7 +38,8 @@ class SiteController {
 				$firstname = $_POST['first_name'];
 				$lastname = $_POST['last_name'];
 				$email = $_POST['email'];
-				$this->signupProcess($username, $password, $firstname, $lastname, $email);
+                $gender = $_POST['gender'];
+				$this->signupProcess($username, $password, $firstname, $lastname, $email, $gender);
 				break;
 			case 'logout':
 				$this->logoutProcess();
@@ -108,6 +109,7 @@ class SiteController {
 		$password = $_POST['password'];
 		$email = $_POST['email'];
 		$image = $_POST['image'];
+        $gender = $_POST['gender'];
 		if (!empty($firstname)) {
 			$user->firstname = $firstname;
 		}
@@ -126,6 +128,9 @@ class SiteController {
 		if (!empty($image)) {
 			$user->image = $image;
 		}
+        if (!empty($gender)) {
+            $user->gender = $gender;
+        }
 		$user->permissions = $user->permissions;
 		$user->save();
 		header('Location: '.BASE_URL.'/profile/'.$user->id); exit();
@@ -266,7 +271,7 @@ class SiteController {
 		include_once SYSTEM_PATH.'/view/signup.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
-	public function signupProcess($un, $pw, $fn, $ln, $em) {
+	public function signupProcess($un, $pw, $fn, $ln, $em, $ge) {
 		//connects to the database
 /*		$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die("Connection Failed: " . $conn->connect_error);
 		//adding to the table in the database
@@ -280,7 +285,7 @@ class SiteController {
     );
 		//checks to see if it was successfully added to the database
 		$conn->query($sql) or die('Error:'.$conn->error);*/
-		if(empty($un) || empty($pw) || empty($fn) || empty($ln) || empty($em)) {
+		if(empty($un) || empty($pw) || empty($fn) || empty($ln) || empty($em) || empty($ge)) {
 			header('Location: '.BASE_URL.'/signup'); exit();
 		}
 		$users = User::getUsers();
@@ -299,6 +304,7 @@ class SiteController {
 		$user->lastname = $ln;
 		$user->email = $em;
 		$user->permissions = 0;
+        $user->gender = $ge;
 		//echo $user->id;
 		$userID = $user->save();
         
@@ -313,7 +319,7 @@ class SiteController {
 		//echo $userID;
 		header('Location: '.BASE_URL.'/login'); exit();
 	}
-
+    
     public function checkUsername() {
 
 		$username = $_GET['username'];
