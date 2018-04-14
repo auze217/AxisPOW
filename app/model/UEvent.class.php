@@ -11,7 +11,7 @@ class UEvent {
   //might possibly make it an int thats the camps id
   public $details = '';
   public $date_created = '';
-  public $user_id = '';
+  public $user_id = 0;
 
 
   // return a Soldier object by ID
@@ -93,7 +93,7 @@ class UEvent {
     $q = sprintf("UPDATE `user_events` SET `title` = '$this->title', `details` = '$this->details', `date_created` = '$this->date_created', `user_id` = '$this->user_id' WHERE `users`.`id` = $this->id;"
       );
     $db->query($q); // execute query
-    //return $db->id; // return this object's ID
+    return $db->id; // return this object's ID
   }
   public function delete() {
     if($this->id == 0)

@@ -107,7 +107,7 @@ class User {
   //  echo $this->username;
     $q = sprintf("INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `permissions`, `image`) VALUES (NULL, '$this->firstname', '$this->lastname', '$this->username', '$this->password', '$this->email', '$this->permissions', '$this->image');"
     );
-      
+
     //echo $q;
     $db->query($q); // execute query
     $this->id = $db->getInsertID(); // set the ID for the new object

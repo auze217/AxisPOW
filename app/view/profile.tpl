@@ -103,8 +103,7 @@ if(isset($_SESSION['username'])):
               <p class="card-text"><strong> Email:</strong> <?= $user->email ?></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button><!--could be where we found the information -->
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button><!--edit the life event -->
+                  <a class="btn btn-primary" href="<?= BASE_URL ?>/update/<?= $user->id ?>">Edit</a>
                 </div>
               </div>
             </div>

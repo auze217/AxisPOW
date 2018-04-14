@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 30, 2018 at 06:46 PM
--- Server version: 5.6.39
--- PHP Version: 7.0.27
+-- Host: 127.0.0.1
+-- Generation Time: Apr 13, 2018 at 10:58 PM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `camps` (
   `id` int(11) NOT NULL,
-  `name` varchar(1000) NOT NULL,
-  `state` varchar(1000) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `state` varchar(100) NOT NULL,
   `prisoners` int(11) NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -42,16 +42,7 @@ CREATE TABLE `camps` (
 
 INSERT INTO `camps` (`id`, `name`, `state`, `prisoners`, `image`) VALUES
 (1, 'Camp Aliceville', 'Alabama', 6000, 'aliceville.jpg'),
-(2, 'Camp Atterbury', 'Indiana', 13500, 'atterbury.jpg'),
-(3, 'Camp Florence', 'Arizona', 0, 'florence.jpg'),
-(4, 'Camp McAlester', 'Oklahoma', 0, 'mcalester.jpg'),
-(5, 'Camp New Ulm', 'Minnesota', 0, 'newulm.jpg'),
-(6, 'Camp Rhinelander', 'Wisconsin', 0, ''),
-(7, 'Camp Ritchie', 'Maryland', 0, 'ritchie.jpg'),
-(8, 'Camp Tonakawa', 'Oklahoma', 0, ''),
-(9, 'Camp White Rock', 'Texas', 0, ''),
-(10, 'Fort Kearney', 'Rhode Island', 0, ''),
-(11, 'Camp Salina', 'Utah', 0, '');
+(2, 'Camp Atterberry', 'Oklahoma', 13500, '');
 
 -- --------------------------------------------------------
 
@@ -63,7 +54,7 @@ CREATE TABLE `life_event` (
   `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `details` varchar(20000) NOT NULL,
-  `image` varchar(50) NOT NULL,
+  `image` varchar(100) NOT NULL,
   `camp_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -72,8 +63,12 @@ CREATE TABLE `life_event` (
 --
 
 INSERT INTO `life_event` (`id`, `title`, `details`, `image`, `camp_id`) VALUES
-(1, 'Aliceville POW Newspaper', 'While imprisoned, the prisoners created their own newspaper about daily events in the outside world and called their newspaper, \"The Fenced Guest\".', 'alicevillenewspaper.png', 1),
-(2, 'The Influx of Prisoners', 'The majority of prisoners in Aliceville came from the Allied Powers decisive victory at the Battle of El Alamein and in North Africa in November 1942. The victory resulted in over 3,000 prisoners needing to be housed and Aliceville was the chosen location.', '', 1);
+(1, 'Test Event', 'Nothing Happened Just testing bruh', '', 1),
+(3, 'Conners', 'Gay', '', 2),
+(4, 'Conners', 'Gay', '', 2),
+(5, 'Conners', 'Gay', '', 2),
+(6, 'Conners', 'Gay', '', 2),
+(7, 'Conners', 'Gay', '', 2);
 
 -- --------------------------------------------------------
 
@@ -87,15 +82,63 @@ CREATE TABLE `users` (
   `last_name` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL
+  `email` varchar(100) NOT NULL,
+  `permissions` int(11) NOT NULL,
+  `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`) VALUES
-(1, 'Austin', 'Zensen', 'auze217', 'lmao', 'auze217@vt.edu');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `permissions`, `image`) VALUES
+(1, 'Austin', 'Zensen', 'auze217', 'lmao', 'auze217@vt.edu', 1, 'auze217.jpg'),
+(2, 'Conner', 'Caprio', 'caprioc', 'lmao', 'caprioc@vt.edu', 1, 'caprioc.jpg'),
+(3, 'Shane', 'Burchard', 'sbbmain', 'lmao', 'sbbmain@vt.edu', 0, ''),
+(4, 'rykley', 'cooper', 'rybikes', 'bikes', 'rybikes@gmail.com', 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_events`
+--
+
+CREATE TABLE `user_events` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `details` int(11) NOT NULL,
+  `date_created` date NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_events`
+--
+
+INSERT INTO `user_events` (`id`, `title`, `details`, `date_created`, `user_id`) VALUES
+(1, 'Looked at Camp Alliceville', 1, '2018-04-05', 1),
+(2, 'Visited Camp Aliceville', 1, '2018-04-10', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_followers`
+--
+
+CREATE TABLE `user_followers` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `follower` varchar(100) NOT NULL,
+  `follower_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_followers`
+--
+
+INSERT INTO `user_followers` (`id`, `user_id`, `username`, `follower`, `follower_id`) VALUES
+(1, 1, 'auze217', 'caprio', 2);
 
 --
 -- Indexes for dumped tables
@@ -120,6 +163,18 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_events`
+--
+ALTER TABLE `user_events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_followers`
+--
+ALTER TABLE `user_followers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -127,19 +182,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `camps`
 --
 ALTER TABLE `camps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `life_event`
 --
 ALTER TABLE `life_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `user_events`
+--
+ALTER TABLE `user_events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user_followers`
+--
+ALTER TABLE `user_followers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

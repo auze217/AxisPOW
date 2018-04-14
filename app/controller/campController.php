@@ -114,13 +114,6 @@ class CampController {
   public function view($id) {
     if (isset($_SESSION['username'])) {
       $user= User::loadByUn($_SESSION['username']);
-        $userID = $user->id;
-        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
-        $j = Camp::loadById($id);
-        //$result = $conn->query($j);
-        $campName = 'Visited '.$j->name;
-        $q = sprintf("UPDATE `user_events` SET `title` = '$campName', `details` = '$id' WHERE `user_events`.`user_id` = '$userID';");
-        $result = $conn->query($q);
     }
     //connecting to the database
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);

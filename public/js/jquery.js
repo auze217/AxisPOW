@@ -198,13 +198,13 @@ $(document).ready(function(){
             //alert("made to 2nd area");
           // server data wasn't saved successfully
           //alert('Server error: ' + data.error);
-            $('#user').append("Username taken please change ");
+            $('#user').append("Username taken please change");
         }
       })
       .fail(function(){
             //alert("made to 3rd area");
         // the Ajax call failed
-        $('#user').append("ajax call failed ");
+        $('#user').append("ajax call failed");
       });
     })
   });

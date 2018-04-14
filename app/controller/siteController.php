@@ -77,9 +77,59 @@ class SiteController {
 				$id = $_GET['id'];
 				$this->followDelete($id);
 				break;
+			case 'userUpdate':
+				$id = $_GET['id'];
+				$this->userUpdate($id);
+				break;
+			case 'userUpdateProcess':
+				$id = $_GET['id'];
+				$this->userUpdateProcess($id);
 
 		}
 
+	}
+	public function userUpdate($id) {
+		$user = User::loadById($id);
+		if ($_SESSION['username'] == $user->username) {
+			$pageTitle = "Update $user->username";
+
+			include_once SYSTEM_PATH.'/view/header.tpl';
+			include_once SYSTEM_PATH.'/view/userUpdate.tpl';
+			include_once SYSTEM_PATH.'/view/footer.tpl';
+		}
+		else {
+			header('Location: '.BASE_URL.'/dashboard'); exit;
+		}
+	}
+	public function userUpdateProcess($id) {
+		$user = User::loadById($id);
+		$firstname = $_POST['first_name'];
+		$lastname = $_POST['last_name'];
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		$email = $_POST['email'];
+		$image = $_POST['image'];
+		if (!empty($firstname)) {
+			$user->firstname = $firstname;
+		}
+		if (!empty($lastname)) {
+			$user->lastname = $lastname;
+		}
+		if (!empty($username)) {
+			$user->username = $username;
+		}
+		if (!empty($password)) {
+			$user->password = $password;
+		}
+		if (!empty($email)) {
+			$user->email = $email;
+		}
+		if (!empty($image)) {
+			$user->image = $image;
+		}
+		$user->permissions = $user->permissions;
+		$user->save();
+		header('Location: '.BASE_URL.'/profile/'.$user->id); exit();
 	}
 	public function followAdd($id) {
 
@@ -217,7 +267,7 @@ class SiteController {
 		$users = User::getUsers();
 		foreach($users as $u) {
 			if ($u->username == $un) {
-				echo '<script language="javascrip/followt">';
+				echo '<script language="javascript">';
 				echo 'alert("Username already exists.")';
 				echo '</script>';
 				header('Location: '.BASE_URL.'/signup'); exit();
@@ -229,31 +279,15 @@ class SiteController {
 		$user->firstname = $fn;
 		$user->lastname = $ln;
 		$user->email = $em;
-		$user->permissions = 0;
-        echo ($un);
-        echo ($pw);
-        echo ($fn);
-        echo ($ln);
-        echo ($em);
+		//$user->permissions = 0;
 		//echo $user->id;
-        //$user->insert();
 		$userID = $user->save();
-        
-        $userEvent = new UEvent();
-        $userEvent->title = 'Made an account';
-        $userEvent->details = 1;
-        $userEvent->date_created = '2018-04-13';
-        $userEvent->user_id = $user->id;
-        $userEvent->insert();
-        $userEvent->save();
-        $userEvent->update();
-        
 		//echo $userID;
 		header('Location: '.BASE_URL.'/login'); exit();
 	}
 
     public function checkUsername() {
-        //echo('PLLLLLLLLLLLLLLLLLLLLLLLLLLL');
+
 		$username = $_GET['username'];
        // echo $username;
 
