@@ -46,3 +46,4 @@ RewriteRule ^camps/delete/process/(\d+)/?$ app/controller/campController.php?act
 RewriteRule ^camps/camp/?$ app/controller/campController.php?action=camp [QSA,L]
 RewriteRule ^camps/event/(\d+)/?$ app/controller/campController.php?action=event&id=$1 [QSA,L]
 RewriteRule ^camps/view/life-event/add/process/(\d+)/?$ app/controller/campController.php?action=addLifeEventProcess&id=$1 [QSA,L]
+RewriteRule ^camps/view/life_event/delete/process/(\d+)/?$ app/controller/campController.php?actioner=deleteLifeEventProcess&id=$1 [QSA,L]

@@ -40,8 +40,9 @@ $(document).ready(function(){
 
     var new_title = $('#eventTitle').val();
     var new_details = $('#eventDescription').val();
+    alert(new_title);
          if (new_title == "" || new_details == "") {
-             
+
              return;
          }
     var new_id = $('#pageId').text().trim();
@@ -51,7 +52,7 @@ $(document).ready(function(){
          // send form data via Ajax
     $.post(
 
-        'http://' + window.location.hostname + '/tester/camps/view/life-event/add/process/' + new_id,
+        'http://' + window.location.hostname + '/AxisPOW/camps/view/life-event/add/process/' + new_id,
         {
             title: new_title,
             details: new_details
@@ -185,7 +186,7 @@ $(document).ready(function(){
 
   }
     $('#username').blur(function() {
-        
+
         var username = $('#username').val();
         //alert(username);
         console.log(window.location.href + '/add/process/check/');

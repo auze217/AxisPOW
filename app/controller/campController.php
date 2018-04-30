@@ -46,19 +46,27 @@ class CampController {
         $id = $_GET['id'];
         $this->addLifeEventProcess($id);
         break;
-
+    case 'deleteLifeEventProcess':
+        $id = $_GET['id'];
+        $this->deleteLifeEventProcess($id);
+        break;
     }
   }
+  public function deleteLifeEventProcess($id) {
+
+  }
     public function addLifeEventProcess($id) {
-		$title = $_POST['title'];
-		$details = $_POST['details'];
+		    $title = $_POST['title'];
+		    $details = $_POST['details'];
+        //$image = $_POST['image']; //possibly wont be used
+        //$url = $_POST['url'];
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
 
-        $q = sprintf("INSERT INTO `life_event` (`title`, `details`, `image`, `camp_id`) VALUES
-    ('%s', '%s', '%s', '%s');", $title, $details, "", $id);
+    $q = sprintf("INSERT INTO `life_event` (`title`, `details`, `image`, `url`, `camp_id`) VALUES
+    ('%s', '%s', '%s', '%s', '%s');", $title, $details, "", "", $id);
 
-         $result = $conn->query($q);
-        if(!$result) {
+    $result = $conn->query($q);
+    if(!$result) {
       trigger_error('Invalid query: '.$conn->error);
     }
 

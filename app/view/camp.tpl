@@ -93,6 +93,16 @@
             Please enter a description.
           </div>
         </div>
+        <div class="mb-3">
+          <label for="image">Image</label>
+           <textarea class="form-control" name="image" id="eventImage" placeholder="Image"></textarea>
+          <!--<input type="text" class="form-control" name="email" id="email" placeholder="you@example.com" required> -->
+        </div>
+        <div class="mb-3">
+          <label for="url">Link</label>
+           <textarea class="form-control" name="link" id="eventLink" placeholder="Link to more extra information"></textarea>
+          <!--<input type="text" class="form-control" name="email" id="email" placeholder="you@example.com" required> -->
+        </div>
         <input id="submitEventButton" type="button" name="submit" value="Add" class="btn btn-sm btn-outline-secondary"/>
           <p id="pageId" style="display: none" type="hidden">
             <?= $r['id'] ?></p>
@@ -108,10 +118,12 @@
                 <div class="card-body">
                   <p class="card-text"><strong> <?= $levents['title'] ?></strong> </p>
                   <p class="card-text"><?= $levents['details'] ?></p>
+                  <a href="<?= $levents['url'] ?>" class="btn btn-sm btn-outline-secondary"> More Information </a>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button><!--could be where we found the information -->
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button><!--edit the life event -->
+                      <?php if(isset($_SESSION['username']) && $user->permissions == 1): ?>
+                      <a href="<?=BASE_URL?>/camps/view/life_event/delete/process/<?= $levents['id'] ?>" class="btn btn-sm btn-outline-secondary"> Delete </a>
+                    <?php endif; ?>
                     </div>
                   </div>
                 </div>
