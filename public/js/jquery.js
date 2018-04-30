@@ -40,6 +40,8 @@ $(document).ready(function(){
 
     var new_title = $('#eventTitle').val();
     var new_details = $('#eventDescription').val();
+    var new_image = $('#eventImage').val();
+    var new_link = $('#eventLink').val();
     alert(new_title);
          if (new_title == "" || new_details == "") {
 
@@ -55,7 +57,9 @@ $(document).ready(function(){
         'http://' + window.location.hostname + '/AxisPOW/camps/view/life-event/add/process/' + new_id,
         {
             title: new_title,
-            details: new_details
+            details: new_details,
+            image: new_image,
+            url: new_link
         },
         function(data){
             var fullTitle = $('<p class="card-text"><strong>' +  new_title + '</p>');

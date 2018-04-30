@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="<?= BASE_URL ?>/public/img/logo.jpg">
 
-  <title>Sign In</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="https://getbootstrap.com/docs/4.0/examples/sign-in/signin.css" rel="stylesheet">
   <script type="text/javascript" src="<?= BASE_URL ?>/public/js/jquery-3.3.1.min.js"></script>
 
   <script type="text/javascript" src="<?= BASE_URL ?>/public/js/jquery-script.js"></script>
-
+  <!-- this is commented out because I think there is something wrong with bootstrap itself,
+  if you go on the website we literally have the same sign=in and I went on chrome and microsoft edge
+  and the website was broken
+  <link href="https://getbootstrap.com/docs/4.0/examples/sign-in/signin.css" rel="stylesheet" id="bootstrap-css">
+-->
+</head>
  <body class="text-center">
    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
      <a class="navbar-brand" href="#">Guide</a>

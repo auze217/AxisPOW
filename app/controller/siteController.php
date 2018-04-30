@@ -158,10 +158,10 @@ class SiteController {
 	}
 	public function followDelete($id) {
 		$user = User::loadByUn($_SESSION['username']);
-		
+
 		$follow = Followers::loadById($id, $user->id);
 		$follow->delete();
-		
+
 		header('Location: '.BASE_URL.'/profile/'.$user->id); exit();
 	}
 	public function followerProfile($id) {
@@ -201,9 +201,9 @@ class SiteController {
 	public function login() {
 		$pageTitle = 'Login';
 
-		//include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/sign_in.tpl';
-		//include_once SYSTEM_PATH.'/view/footer.tpl';
+		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 	public function loginProcess($un, $pw) {
 
@@ -307,7 +307,7 @@ class SiteController {
         $user->gender = $ge;
 		//echo $user->id;
 		$userID = $user->save();
-        
+
         $userEvent = new UEvent();
         $userEvent->title = 'Made an account';
         $userEvent->details = 1;
@@ -319,7 +319,7 @@ class SiteController {
 		//echo $userID;
 		header('Location: '.BASE_URL.'/login'); exit();
 	}
-    
+
     public function checkUsername() {
 
 		$username = $_GET['username'];

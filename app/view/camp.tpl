@@ -69,7 +69,9 @@
         </div>
       </section>
       <button id="addEventButton" class="btn btn-sm btn-outline-secondary"> Add Life Event </button>
+      <?php if(isset($_SESSION['username']) && $user->permissions == 1): ?>
         <a href="<?=BASE_URL?>/camps/delete/process/<?= $r['id']?>" class="btn btn-sm btn-outline-secondary" style="margin-right: 50px;"> Delete Camp Entry </a>
+      <?php endif; ?>
       <a class="btn btn-sm btn-outline-secondary" style="float: right;" href="<?=BASE_URL?>/camps/update/<?=$r['id']?>"> Edit Camp Info</a>
       <form id="addEventForm" style="display:none;">
         <div class="mb-3">

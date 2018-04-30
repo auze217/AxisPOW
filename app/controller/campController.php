@@ -53,17 +53,35 @@ class CampController {
     }
   }
   public function deleteLifeEventProcess($id) {
+    if(!isset($_SESSION['username'])){
+      header('Location: '.BASE_URL.'/login'); exit();
+    }
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
+    }
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+    $sql = sprintf("SELECT * FROM life_event WHERE camp_id = '%d';",
+      $id);
+    $life = $conn->query($sql);
+    if(!$life) {
+      trigger_error('Invalid query: '.$conn->error);
+    }
+    $event = $life->fetch_assoc();
+    $camp_id = $event['camp_id'];
+    $q = sprintf("DELETE FROM life_event WHERE id='$id'");
 
+    $conn->query($q) or die('Error: '.$conn->error);
+    header('Location: '.BASE_URL.'/camps/view/'.$camp_id); exit();
   }
     public function addLifeEventProcess($id) {
 		    $title = $_POST['title'];
 		    $details = $_POST['details'];
-        //$image = $_POST['image']; //possibly wont be used
-        //$url = $_POST['url'];
+        $image = $_POST['image']; //possibly wont be used
+        $url = $_POST['url'];
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
 
     $q = sprintf("INSERT INTO `life_event` (`title`, `details`, `image`, `url`, `camp_id`) VALUES
-    ('%s', '%s', '%s', '%s', '%s');", $title, $details, "", "", $id);
+    ('%s', '%s', '%s', '%s', '%s');", $title, $details, "", $url, $id);
 
     $result = $conn->query($q);
     if(!$result) {

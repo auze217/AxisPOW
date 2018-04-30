@@ -79,7 +79,9 @@
           <div class="my-3 py-3">
             <h2 class="display-5"><a href="<?=BASE_URL?>/camps/view/<?= $row['id'] ?>"><?= $row['name']?></a></h2>
             <p class="lead"><?= $row['state'] ?></p>
+            <?php if(isset($_SESSION['username']) && $user->permissions == 1): ?>
             <a href="<?=BASE_URL?>/camps/delete/process/<?= $row['id']?>" class="btn btn-sm btn-outline-secondary"> Delete Camp Entry </a>
+          <?php endif; ?>
           </div>
           <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
           <img style="height:100%" style="width:100%" src="<?= BASE_URL ?>/public/img/<?= $row['image'] ?>" class="img-rounded" alt="Image of <?= $row['name'] ?>"></div>
