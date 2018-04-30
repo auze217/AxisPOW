@@ -40,6 +40,10 @@ $(document).ready(function(){
 
     var new_title = $('#eventTitle').val();
     var new_details = $('#eventDescription').val();
+         if (new_title == "" || new_details == "") {
+             
+             return;
+         }
     var new_id = $('#pageId').text().trim();
 
          console.log('http://' + window.location.hostname + '/AxisPOW/camps/view/life-event/add/process/' + new_id);
