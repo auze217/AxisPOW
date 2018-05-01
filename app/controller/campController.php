@@ -50,6 +50,27 @@ class CampController {
         $id = $_GET['id'];
         $this->deleteLifeEventProcess($id);
         break;
+    case 'export':
+      $this->export();
+      break;
+    }
+  }
+  public function export() {
+
+    if(isset($_POST["Export"])){
+
+      header('Content-Type: text/csv; charset=utf-8');
+      header('Content-Disposition: attachment; filename=data.csv');
+      $output = fopen("php://output", "w");
+      fputcsv($output, array('id', 'name', 'state', 'prisoners', 'image'));
+      $query = "SELECT * from camps ORDER BY id ASC";
+      $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error '.$con->connect_error);
+      $result = mysqli_query($con, $query);
+      while($row = mysqli_fetch_assoc($result))
+      {
+           fputcsv($output, $row);
+      }
+      fclose($output);
     }
   }
   public function deleteLifeEventProcess($id) {
@@ -129,6 +150,8 @@ class CampController {
     if (empty($name) || empty($state)) {
       header('Location: '.BASE_URL.'/camps/add'); exit();
     }
+    if( empty($image))
+      $image = "black.jpg";
     $camp = new Camp();
     $camp->name = $name;
     $camp->state = $state;

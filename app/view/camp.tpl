@@ -1,6 +1,6 @@
 
     <!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/4.1/examples/album/album.css" rel="stylesheet">
   </head>
 
   <body>
@@ -119,6 +119,8 @@
 
                 <div class="card-body">
                   <p class="card-text"><strong> <?= $levents['title'] ?></strong> </p>
+                  <img src="<?= $levents['image'] ?>" alt="Image of <?= $levents['image'] ?>" width="250 px">
+
                   <p class="card-text"><?= $levents['details'] ?></p>
                   <a href="<?= $levents['url'] ?>" class="btn btn-sm btn-outline-secondary"> More Information </a>
                   <div class="d-flex justify-content-between align-items-center">

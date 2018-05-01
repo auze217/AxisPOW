@@ -85,9 +85,28 @@ class SiteController {
 			case 'userUpdateProcess':
 				$id = $_GET['id'];
 				$this->userUpdateProcess($id);
-
+				break;
+			case 'graph':
+				$this->graph();
+				break;
 		}
 
+	}
+	public function graph() {
+		$user = User::loadById($_SESSION['username']);
+		$pageTitle = 'Prisoner Graph';
+		$camps = Camp::getCamps();
+		$data = array();
+		$names = array();
+		$i = 0;
+		foreach($camps as $camp) {
+			$data[$i] = $camp->prisoners;
+			$names[$i] = $camp->name;
+			$i++;
+		}
+		include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/graph2.tpl';
+		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 	public function userUpdate($id) {
 		$user = User::loadById($id);
@@ -166,7 +185,6 @@ class SiteController {
 	}
 	public function followerProfile($id) {
 		$user = User::loadById($id);
-		//echo $user->firstname;
 		$pageTitle = $user->username;
 		$uevents = UEvent::getUvents($user->id);
 		$followers = Followers::getFollowers($user->id);
@@ -176,7 +194,6 @@ class SiteController {
 	}
 	public function profile() {
 		$user = User::loadByUn($_SESSION['username']);
-		//echo $user->firstname;
 		$pageTitle = $user->username;
 		$uevents = UEvent::getUvents($user->id);
 		$followers = Followers::getFollowers($user->id);
@@ -209,12 +226,8 @@ class SiteController {
 
 			$users = User::getUsers();
 			//    $u = User::loadById(1);
-			//  echo $u->username;
 			$un = $_POST['username'];
 			$pw = $_POST['password'];
-			echo $un;
-			echo $pw;
-			echo count($users);
 			foreach ($users as $user) {
 				if ( $un == $user->username && $pw == $user->password) {
 					$_SESSION['username'] = $un;
@@ -246,7 +259,6 @@ class SiteController {
 		$pageTitle = 'Admin';
 		if (isset($_SESSION['username'])) {
 			$user= User::loadByUn($_SESSION['username']);
-			echo $user->permissions;
 		}
 		$users = User::getUsers();
 		include_once SYSTEM_PATH.'/view/header.tpl';
@@ -265,7 +277,6 @@ class SiteController {
 		$pageTitle = 'Sign Up';
         if (isset($_SESSION['username'])) {
 			$user= User::loadByUn($_SESSION['username']);
-			//echo $user->permissions;
 		}
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/signup.tpl';
@@ -291,9 +302,6 @@ class SiteController {
 		$users = User::getUsers();
 		foreach($users as $u) {
 			if ($u->username == $un) {
-				echo '<script language="javascript">';
-				echo 'alert("Username already exists.")';
-				echo '</script>';
 				header('Location: '.BASE_URL.'/signup'); exit();
 			}
 		}
@@ -305,7 +313,6 @@ class SiteController {
 		$user->email = $em;
 		$user->permissions = 0;
         $user->gender = $ge;
-		//echo $user->id;
 		$userID = $user->save();
 
         $userEvent = new UEvent();
@@ -316,14 +323,12 @@ class SiteController {
         $userEvent->insert();
         $userEvent->save();
         $userEvent->update();
-		//echo $userID;
 		header('Location: '.BASE_URL.'/login'); exit();
 	}
 
     public function checkUsername() {
 
 		$username = $_GET['username'];
-       // echo $username;
 
         $json = array(
 				'success' => 'success'
@@ -340,7 +345,7 @@ class SiteController {
 		}
 
 		header('Content-Type: application/json'); // let client know it's Ajax
-		echo json_encode($json); // print the JSON
+	//	echo json_encode($json); // print the JSON
 
 	}
 
