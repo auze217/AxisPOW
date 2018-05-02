@@ -43,6 +43,35 @@ class Camp {
       }
     }
   }
+  public static function loadByName($name) {
+    $db = Db::instance(); // create db connection
+    // build query
+    $q = sprintf("SELECT * FROM `%s` WHERE name = %d;",
+      self::DB_TABLE,
+      $name
+      );
+    $result = $db->query($q); // execute query
+    // make sure we found something
+    if($result) {
+    if($result->num_rows == 0) {
+      return null;
+    } else {
+      $row = $result->fetch_assoc(); // get results as associative array
+
+      $soldier = new Camp(); // instantiate new Soldier object
+
+      // store db results in local object
+      $soldier->id           = $row['id'];
+      $soldier->name   = $row['name'];
+      $soldier->state    = $row['state'];
+      $soldier->prisoners         = $row['prisoners'];
+      $soldier->image = $row['image'];
+      //$soldier->email = $row['email'];
+      //$soldier->permissions = $row['permissions'];
+      return $soldier; // return the soldier
+    }
+  }
+  }
 
   // return all Soldiers as an array
   public static function getCamps() {

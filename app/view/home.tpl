@@ -54,10 +54,6 @@
         </li>
       <?php endif; ?>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </div>
   </nav>
 
@@ -80,20 +76,63 @@
       <div class="container">
         <!-- Example row of columns -->
         <div class="row">
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+          <div class="album py-5 bg-light">
+            <div id="events" class="container">
+
+              <div class="row">
+                <?php if($one): ?>
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+
+                    <div class="card-body">
+                      <a href="<?= BASE_URL ?>/camps/view/<?= $one->id ?>"class="card-text"><strong> <?= $one->name ?></strong> </a>
+                      <img src="<?= BASE_URL ?>/public/img/<?= $one->image ?>" alt="Image of <?= $one->name ?>" width="250 px" height="150 px">
+
+                      <p class="card-text"><?= $one->state ?></p>
+                      <p  class="btn btn-sm btn-outline-secondary"> Prisoners: <?= $one->prisoners ?> </p>
+                    </div>
+                  </div>
+                </div>
+              <?php endif; ?>
+
+                  <?php if($two): ?>
+                  <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+
+                      <div class="card-body">
+                        <a href="<?= BASE_URL ?>/camps/view/<?= $two->id ?>"class="card-text"><strong> <?= $two->name ?></strong> </a>
+                        <img src="<?= BASE_URL ?>/public/img/<?= $two->image ?>" alt="Image of <?= $two->name ?>" width="250 px" height="150 px">
+
+                        <p class="card-text"><?= $two->state ?></p>
+                        <p  class="btn btn-sm btn-outline-secondary"> Prisoners: <?= $two->prisoners ?> </p>
+                      </div>
+                    </div>
+                  </div>
+                <?php endif; ?>
+
+
+                <?php if($three): ?>
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+
+                    <div class="card-body">
+                      <a href="<?= BASE_URL ?>/camps/view/<?= $three->id ?>"class="card-text"><strong> <?= $three->name ?></strong> </a>
+                      <img src="<?= BASE_URL ?>/public/img/<?= $three->image ?>" alt="Image of <?= $three->name ?>" width="250 px" height="150 px">
+
+                      <p class="card-text"><?= $three->state ?></p>
+                      <p  class="btn btn-sm btn-outline-secondary"> Prisoners: <?= $three->prisoners ?> </p>
+                    </div>
+                  </div>
+                </div>
+              <?php endif; ?>
+
+
+
+
+              </div>
+
+
+            </div>
           </div>
         </div>
 

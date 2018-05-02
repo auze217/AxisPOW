@@ -53,7 +53,59 @@ class CampController {
     case 'export':
       $this->export();
       break;
+    case 'addGraphProcess':
+      $this->addGraphProcess();
+      break;
+    case 'graph':
+      $this->graph();
+      break;
+    case 'removeGraphProcess':
+      $name = $_POST['removeCampName'];
+      $this->removeGraphProcess($name);
+      break;
+    case 'updateGraphProcess':
+      $name = $_POST['updateCampName'];
+      $prisoners = $_POST['updateCampPrisoners'];
+      $this->updateGraphProcess($name, $prisoners);
+      break;
     }
+  }
+  public function updateGraphProcess($n, $p) {
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+    $q = sprintf("SELECT * FROM camps WHERE name = '%s';",
+      $n
+    ) ;
+    //getting the information of that character based on the sql line
+    $result = $conn->query($q);
+    if(!$result) {
+      trigger_error('Invalid query: '.$conn->error);
+    }
+		$prisoners		 = $p;
+    $row = $result->fetch_assoc();
+
+    if(empty($prisoners))
+      $prisoners = $row['prisoners'];
+
+    $q = sprintf("UPDATE camps SET prisoners='$prisoners' WHERE name='$n';");
+    $conn->query($q) or die('Error: '.$conn->error);
+		header('Location: '.BASE_URL.'/camps/graph/'); exit();
+  }
+  public function graph() {
+    if ( isset($_SESSION['username']))
+      $user = User::loadById($_SESSION['username']);
+    $pageTitle = 'Prisoner Graph';
+    $camps = Camp::getCamps();
+    $data = array();
+    $names = array();
+    $i = 0;
+    foreach($camps as $camp) {
+      $data[$i] = $camp->prisoners;
+      $names[$i] = $camp->name;
+      $i++;
+    }
+    include_once SYSTEM_PATH.'/view/header.tpl';
+    include_once SYSTEM_PATH.'/view/graph2.tpl';
+    include_once SYSTEM_PATH.'/view/footer.tpl';
   }
   public function export() {
 
@@ -160,6 +212,25 @@ class CampController {
     $camp->save();
     header('Location: '.BASE_URL.'/camps'); exit();
   }
+  public function addGraphProcess() {
+    $name = $_POST['camp_name'];
+    $state = $_POST['state'];
+    $prisoners = $_POST['prisoners'];
+    $image = $_POST['image'];
+
+    if (empty($name) || empty($state)) {
+      header('Location: '.BASE_URL.'/graph'); exit();
+    }
+    if( empty($image))
+      $image = "black.jpg";
+    $camp = new Camp();
+    $camp->name = $name;
+    $camp->state = $state;
+    $camp->prisoners = $prisoners;
+    $camp->image = $image;
+    $camp->save();
+    header('Location: '.BASE_URL.'/camps/graph'); exit();
+  }
   public function view($id) {
     if (isset($_SESSION['username'])) {
       $user= User::loadByUn($_SESSION['username']);
@@ -265,5 +336,18 @@ class CampController {
     $conn->query($q) or die('Error: '.$conn->error);
 		header('Location: '.BASE_URL.'/camps'); exit();
   }
+  public function removeGraphProcess($name) {
+    if(!isset($_SESSION['username'])){
+      header('Location: '.BASE_URL.'/login'); exit();
+    }
+    if (isset($_SESSION['username'])) {
+      $user= User::loadByUn($_SESSION['username']);
+    }
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
 
-}
+    $q = sprintf("DELETE FROM camps WHERE name='$name'");
+
+    $conn->query($q) or die('Error: '.$conn->error);
+    header('Location: '.BASE_URL.'/camps/graph'); exit();
+    }
+  }

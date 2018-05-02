@@ -25,12 +25,12 @@ svg {
   fill: #666;
 }
 
-.birthyear,
+.prisoners,
 .age {
   text-anchor: middle;
 }
 
-.birthyear {
+.prisoners {
   fill: #fff;
 }
 
@@ -87,10 +87,6 @@ rect:first-child {
         </li>
       <?php endif; ?>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </div>
   </nav>
   <div>
@@ -103,6 +99,10 @@ rect:first-child {
                   </div>
            </form>
 </div>
+<p><strong> ABOUT THIS GRAPH</strong><br> This graph compares all of the
+   prisoners in each prison camp and compares them all to see which camp
+   had the most amount of prisoners.
+
   <h1> <strong> Graph of Number of Prisoners in Each Camp </strong> </h1>
 <meta charset="utf-8">
 <style>
@@ -121,23 +121,6 @@ rect:first-child {
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-var margin = {top: 20, right: 40, bottom: 30, left: 20},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom,
-    barWidth = Math.floor(width / 19) - 1;
-
-var x = d3.scale.linear()
-    .range([barWidth / 2, width - barWidth / 2]);
-
-var y = d3.scale.linear()
-    .range([height, 0]);
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("right")
-    .tickSize(-width)
-    .tickFormat(function(d) { return Math.round(d / 1e3) + "T"; });
-
 var data = <?php echo json_encode($data) ?>;
 var names = <?php echo json_encode($names) ?>;
 var inc = -1;
@@ -155,5 +138,95 @@ d3.select(".chart")
       inc++;
 
       return names[inc] + ', ' + d; });
-
 </script>
+<p style="margin-left: 10%;"><strong> Number of Prisoners </strong></p>
+<?php if(isset($_SESSION['username'])): ?>
+<button id="addEventButton" class="btn btn-sm btn-outline-secondary"> Add Camp   </button>
+
+<?php endif; ?>
+<form id="addEventForm" action="<?= BASE_URL ?>/camps/graph/add/" method="POST" class="needs-validation" style="display:none;" novalidate>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="campName">Camp name</label>
+      <input type="text" name="camp_name" class="form-control" id="campName" placeholder="" value="" required>
+      <div class="invalid-feedback">
+        Valid camp name is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="state">State</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">@</span>
+      </div>
+      <input type="text" class="form-control" name="state" id="state" placeholder="State" required>
+      <div class="invalid-feedback" style="width: 100%;">
+        The state is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="prisoners">Prisoners</label>
+    <input type="number" class="form-control" name="prisoners" id="prisoners" placeholder="0">
+  </div>
+
+  <div class="mb-3">
+    <label for="image">Camp Image</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">@</span>
+      </div>
+      <input type="text" class="form-control" name="image" id="image" placeholder="">
+    </div>
+  </div>
+
+  <hr class="mb-4">
+  <button class="btn btn-primary btn-lg btn-block" name="submit" type="submit">Add Camp</button>
+</form>
+</div>
+</div>
+
+</div>
+<?php if(isset($_SESSION['username'])): ?>
+<button id="removeEventButton" class="btn btn-sm btn-outline-secondary"> Remove Camp </button>
+
+<?php endif; ?>
+<form id="removeEventForm" action="<?= BASE_URL ?>/camps/graph/remove/" method="POST" class="needs-validation" style="display:none;" novalidate>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="campName">Camp name</label>
+      <input type="text" name="removeCampName" class="form-control" id="removeCampName" placeholder="" value="" required>
+      <div class="invalid-feedback">
+        Valid camp name is required.
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary btn-lg btn-block" name="submit" type="submit">Remove Camp</button>
+  </form>
+  <!--U for CRUD Update -->
+  <?php if(isset($_SESSION['username'])): ?>
+  <button id="updateEventButton" class="btn btn-sm btn-outline-secondary"> Update Camp </button>
+
+  <?php endif; ?>
+  <form id="updateEventForm" action="<?= BASE_URL ?>/camps/graph/update/" method="POST" class="needs-validation" style="display:none;" novalidate>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="campName">Camp name</label>
+        <input type="text" name="updateCampName" class="form-control" id="updateCampName" placeholder="" value="" required>
+        <div class="invalid-feedback">
+          Valid camp name is required.
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="campNumber">Number of Prisoners</label>
+        <input type="number" name="updateCampPrisoners" class="form-control" id="updateCampPrisoners" placeholder="" value="" required>
+        <div class="invalid-feedback">
+          Valid number of prisoners is required.
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-lg btn-block" name="submit" type="submit">Update Camp</button>
+    </form>

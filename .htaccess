@@ -23,7 +23,6 @@ RewriteRule ^follow/add/(\d+)/?$ app/controller/siteController.php?action=follow
 RewriteRule ^follow/delete/(\d+)/?$ app/controller/siteController.php?action=followDelete&id=$1 [QSA,L]
 RewriteRule ^update/(\d+)/?$ app/controller/siteController.php?action=userUpdate&id=$1 [QSA,L]
 RewriteRule ^update/process/(\d+)/?$ app/controller/siteController.php?action=userUpdateProcess&id=$1 [QSA,L]
-RewriteRule ^graph/?$ app/controller/siteController.php?action=graph [QSA,L]
 
 # member
 #RewriteRule ^member/view/(\w+)/?$ app/controller/memberController.php?action=view&id=$1 [QSA,L]
@@ -49,3 +48,7 @@ RewriteRule ^camps/event/(\d+)/?$ app/controller/campController.php?action=event
 RewriteRule ^camps/view/life-event/add/process/(\d+)/?$ app/controller/campController.php?action=addLifeEventProcess&id=$1 [QSA,L]
 RewriteRule ^camps/view/life_event/delete/process/(\d+)/?$ app/controller/campController.php?action=deleteLifeEventProcess&id=$1 [QSA,L]
 RewriteRule ^camps/export/?$ app/controller/campController.php?action=export [QSA,L]
+RewriteRule ^camps/graph/add/?$ app/controller/campController.php?action=addGraphProcess [QSA,L]
+RewriteRule ^camps/graph/?$ app/controller/campController.php?action=graph [QSA,L]
+RewriteRule ^camps/graph/remove/?$ app/controller/campController.php?action=removeGraphProcess [QSA,L]
+RewriteRule ^camps/graph/update/?$ app/controller/campController.php?action=updateGraphProcess [QSA,L]

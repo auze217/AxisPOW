@@ -7,7 +7,17 @@ $(document).ready(function(){
     $('#eventTitle').val('');
     $('#eventDescription').val('');
   });
-
+  $('#removeEventButton').click(function(){
+    $('#removeEventForm').show();
+    $('#removeCampName').focus();
+    $('#removeCampName').val('');
+  });
+  $('#updateEventButton').click(function(){
+    $('#updateEventForm').show();
+    $('#updateCampName').focus();
+    $('#updateCampName').val('');
+    $('#updateCampPrisoners').val(0);
+  });
   $('#addParent').click(function(){
 
     $('#addParentForm').show();

@@ -86,27 +86,8 @@ class SiteController {
 				$id = $_GET['id'];
 				$this->userUpdateProcess($id);
 				break;
-			case 'graph':
-				$this->graph();
-				break;
 		}
 
-	}
-	public function graph() {
-		$user = User::loadById($_SESSION['username']);
-		$pageTitle = 'Prisoner Graph';
-		$camps = Camp::getCamps();
-		$data = array();
-		$names = array();
-		$i = 0;
-		foreach($camps as $camp) {
-			$data[$i] = $camp->prisoners;
-			$names[$i] = $camp->name;
-			$i++;
-		}
-		include_once SYSTEM_PATH.'/view/header.tpl';
-		include_once SYSTEM_PATH.'/view/graph2.tpl';
-		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 	public function userUpdate($id) {
 		$user = User::loadById($id);
@@ -251,6 +232,19 @@ class SiteController {
 	}
   public function home() {
 		$pageTitle = 'Home';
+		//$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE) or die('Error: '.$conn->connect_error);
+    //$q = sprintf("SELECT * FROM camps WHERE id = '%d';",
+    //  1
+    //);
+    //getting the information of that character based on the sql line
+    //$one = $conn->query($q);
+    //if(!$one) {
+    //  trigger_error('Invalid query: '.$conn->error);
+    //}
+		//echo $one['name'];
+		$one = Camp::loadById(1);
+		$two = Camp::loadById(2);
+		$three = Camp::loadById(3);
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/home.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';

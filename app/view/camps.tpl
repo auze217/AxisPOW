@@ -56,10 +56,7 @@
           </li>
         <?php endif; ?>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+
       </div>
     </nav>
 
@@ -71,6 +68,7 @@
         <p class="lead font-weight-normal">Click on any of the prisoner of war camps to get more information on them.</p>
         <!-- might not need this probably get rid of it -->
         <a class="btn btn-primary" href="<?= BASE_URL ?>/camps/add">Add a Prison Camp</a>
+        <a class="btn btn-primary" href="<?= BASE_URL ?>/camps/graph">Visit Prisoner Graph</a>
       </div>
     </div>
     <?php while ($row = $result->fetch_assoc()): ?>
