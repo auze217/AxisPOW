@@ -1,5 +1,6 @@
 <footer class="container py-5">
 <!-- we can put our own footer in here -->
+<p> Property of Peaunt Butter and Carrots&copy and Zenco&copy</p>
 </footer>
 
 

@@ -16,7 +16,7 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Guide</a>
+      <p class="navbar-brand" href="#">PBC&copy</p>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -32,7 +32,7 @@
             <a class="nav-link" href="<?= BASE_URL ?>/">Home</a>
           </li>
         <?php endif; ?>
-          <li class="nav-item">
+          <li class="nav-item actives">
             <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
           </li>
           <?php if(isset($_SESSION['username'])): ?>
@@ -63,9 +63,9 @@
 
 
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center text-white bg-light" style="background: url('<?=BASE_URL?>/public/img/background.jpg')">
-      <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal">Prisoner of War Camps in America</h1>
-        <p class="lead font-weight-normal">Click on any of the prisoner of war camps to get more information on them.</p>
+      <div class="col-md-5 p-lg-5 mx-auto my-5 text-center"style="margin-right:100% !important">
+        <h1 class="display-4 font-weight-normal text-center">Prisoner of War Camps in America</h1>
+        <p class="lead font-weight-normal text-center">Click on any of the prisoner of war camps to get more information on them.</p>
         <!-- might not need this probably get rid of it -->
         <a class="btn btn-primary" href="<?= BASE_URL ?>/camps/add">Add a Prison Camp</a>
         <a class="btn btn-primary" href="<?= BASE_URL ?>/camps/graph">Visit Prisoner Graph</a>

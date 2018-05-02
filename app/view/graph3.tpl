@@ -1,53 +1,34 @@
 <!DOCTYPE html>
-<head>
-  <style>
-svg {
+<meta charset="utf-8">
+<style>
+
+.bar {
+  fill: steelblue;
+
+}
+.bar:hover {
+  fill: #497;
+}
+
+.axis text {
   font: 10px sans-serif;
 }
 
-.y.axis path {
-  display: none;
-}
-
-.y.axis line {
-  stroke: #fff;
-  stroke-opacity: .2;
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
   shape-rendering: crispEdges;
 }
 
-.y.axis .zero line {
-  stroke: #000;
-  stroke-opacity: 1;
-}
-
-.title {
-  font: 300 78px Helvetica Neue;
-  fill: #666;
-}
-
-.prisoners,
-.age {
-  text-anchor: middle;
-}
-
-.prisoners {
-  fill: #fff;
-}
-
-rect {
-  fill-opacity: .6;
-  fill: #e377c2;
-}
-
-rect:first-child {
-  fill: #1f77b4;
+.x.axis path {
+  display: none;
 }
 
 </style>
-</head>
 <body>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Guide</a>
+    <p class="navbar-brand">PBC&copy</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,15 +36,15 @@ rect:first-child {
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <?php if(isset($_SESSION['username'])): ?>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="<?= BASE_URL ?>/dashboard">Home</a>
         </li>
       <?php else: ?>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="<?= BASE_URL ?>/">Home</a>
         </li>
       <?php endif; ?>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
         </li>
         <?php if(isset($_SESSION['username'])): ?>
@@ -90,56 +71,89 @@ rect:first-child {
     </div>
   </nav>
   <div>
-           <form class="form-horizontal" action="<?= BASE_URL?>/camps/export/" method="post" name="upload_excel"
-                     enctype="multipart/form-data">
-                 <div class="form-group">
-                           <div class="col-md-4 col-md-offset-4">
-                               <input type="submit" name="Export" class="btn btn-success" value="export to excel"/>
-                           </div>
-                  </div>
-           </form>
+
 </div>
 <p><strong> ABOUT THIS GRAPH</strong><br> This graph compares all of the
    prisoners in each prison camp and compares them all to see which camp
    had the most amount of prisoners.
 
   <h1> <strong> Graph of Number of Prisoners in Each Camp </strong> </h1>
-<meta charset="utf-8">
-<style>
-
-.chart div {
-  font: 10px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  color: white;
-}
-
-</style>
-<div class="chart"></div>
-<script src="//d3js.org/d3.v3.min.js"></script>
+<svg class="chart"></svg>
+<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script>
 
-var data = <?php echo json_encode($data) ?>;
-var names = <?php echo json_encode($names) ?>;
-var inc = -1;
-var x = d3.scale.linear()
-    .domain([0, d3.max(data)])
-    .range([0, 420]);
+var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    width = 1360 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
-d3.select(".chart")
-  .selectAll("div")
-    .data(data)
-  .enter().append("div")
-    .text('balls')
-    .style("width", function(d) { return x(d) + "px"; })
-    .text(function(d) {
-      inc++;
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .05  );
 
-      return names[inc] + ', ' + d; });
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var chart = d3.select(".chart")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.csv("<?=BASE_URL ?>/public/data.csv", type, function(error, data) {
+  x.domain(data.map(function(d) {
+    var split = d.name.split(" ");
+    d.name = "";
+    for(i = 1; i < split.length; i++) {
+        d.name += split[i] + " ";
+    }
+    return d.name; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  chart.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  chart.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  chart.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) {
+        return x(d.name); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      .attr("width", x.rangeBand())
+      .on("click", function(d){location.replace("<?=BASE_URL ?>/camps/view/" + d.id);});
+
+});
+
+function type(d) {
+  d.value = +d.value; // coerce to number
+  d.id    = +d.id;
+  return d;
+}
+
 </script>
-<p style="margin-left: 10%;"><strong> Number of Prisoners </strong></p>
+<form class="form-horizontal" action="<?= BASE_URL?>/camps/export/" method="post" name="upload_excel"
+          enctype="multipart/form-data">
+      <div class="form-group">
+                <div class="col-md-4 col-md-offset-4">
+                    <input type="submit" name="Export" class="btn btn-success" value="export to excel"/>
+                </div>
+       </div>
+</form>
+
 <?php if(isset($_SESSION['username'])): ?>
 <button id="addEventButton" class="btn btn-sm btn-outline-secondary"> Add Camp   </button>
 
@@ -230,3 +244,4 @@ d3.select(".chart")
     </div>
     <button class="btn btn-primary btn-lg btn-block" name="submit" type="submit">Update Camp</button>
     </form>
+</body>

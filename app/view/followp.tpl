@@ -24,7 +24,7 @@
           <a class="nav-link" href="<?= BASE_URL ?>/camps">Prison Camps</a>
         </li>
         <?php if(isset($_SESSION['username'])): ?>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="<?= BASE_URL ?>/profile/<?= $user->id ?>">Profile</a>
         </li>
         <li class="nav-item">

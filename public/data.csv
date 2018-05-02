@@ -1,4 +1,9 @@
-id,name,state,prisoners,image
-1,"Camp Aliceville",Alabama,6000,aliceville.jpg
-2,"Camp Atterberry",Oklahoma,13500,
-3,"Camp Owosso",Michigan,7000,
+name,value,id
+Camp Aliceville,6000,1
+Camp Atterberry,13500,2
+Camp Conner,1,31
+Camp jacob,700,30
+Camp Mary,800,29
+Camp New Ulm,7000,4
+Camp O No,7000,27
+Camp Owosso,7000,3

@@ -17,7 +17,7 @@
   </head>
 
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Guide</a>
+    <p class="navbar-brand">PBC&copy</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -69,7 +69,7 @@
           <h1 class="display-3">AXIS Prisoners of War</h1>
           <p>On this website you will learn about AXIS(Nazis and Italians) prisoners of war and what the camps they stayed in were like.</p>
           <!-- this will eventually lead to our webpage that will show all of the prison camps -->
-          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+          <p><a class="btn btn-primary btn-lg" href="<?= BASE_URL ?>/camps" role="button">Learn more &raquo;</a></p>
         </div>
       </div>
 <!-- for this we dont really need but we could possibly put the most well known prison camps here with links to them -->

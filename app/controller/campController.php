@@ -91,8 +91,10 @@ class CampController {
 		header('Location: '.BASE_URL.'/camps/graph/'); exit();
   }
   public function graph() {
-    if ( isset($_SESSION['username']))
-      $user = User::loadById($_SESSION['username']);
+    if ( isset($_SESSION['username'])) {
+      $user = User::loadByUn($_SESSION['username']);
+    }
+
     $pageTitle = 'Prisoner Graph';
     $camps = Camp::getCamps();
     $data = array();
@@ -104,10 +106,10 @@ class CampController {
       $i++;
     }
     include_once SYSTEM_PATH.'/view/header.tpl';
-    include_once SYSTEM_PATH.'/view/graph2.tpl';
+    include_once SYSTEM_PATH.'/view/graph3.tpl';
     include_once SYSTEM_PATH.'/view/footer.tpl';
   }
-  public function export() {
+    public function export() {
 
     if(isset($_POST["Export"])){
 
@@ -219,7 +221,7 @@ class CampController {
     $image = $_POST['image'];
 
     if (empty($name) || empty($state)) {
-      header('Location: '.BASE_URL.'/graph'); exit();
+      header('Location: '.BASE_URL.'/camps/graph'); exit();
     }
     if( empty($image))
       $image = "black.jpg";
@@ -229,7 +231,22 @@ class CampController {
     $camp->prisoners = $prisoners;
     $camp->image = $image;
     $camp->save();
+    $camps = Camp::getCamps();
+    $this->updateCSV($camps);
     header('Location: '.BASE_URL.'/camps/graph'); exit();
+  }
+
+  public function updateCSV($camps) {
+    $file = fopen("../../public/data.csv", "w+") or die("Unable to Open File");
+    //$camps = Camp::getCamps();\
+    fwrite($file, "name,value,id\n");
+    foreach($camps as $camp) {
+      $string = "$camp->name,$camp->prisoners,$camp->id\n";
+      fwrite($file,$string);
+      //fwrite($file, $camp->name + ",");
+      //fwrite($file, $camp->prisoners+ "\n");
+    }
+    fclose($file);
   }
   public function view($id) {
     if (isset($_SESSION['username'])) {

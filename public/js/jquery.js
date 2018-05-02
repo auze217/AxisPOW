@@ -1,7 +1,7 @@
 $(document).ready(function(){
   //trying to do what I did for Single in jquery for FamProfile
   $('#addEventButton').click(function(){
-
+    
     $('#addEventForm').show();
     $('#eventTitle').focus();
     $('#eventTitle').val('');
