@@ -70,6 +70,19 @@
       </ul>
     </div>
   </nav>
+
+  <!--BreadCrumbs-->
+    <?php if(!isset($_SESSION['username'])): ?>
+    <p id="breadcrumbs" class="clear"><a href="<?= BASE_URL ?>/">Home</a> &gt;
+    <?php else: ?>
+    <p id="breadcrumbs" class="clear"><a href="<?= BASE_URL ?>/dashboard">Home</a> &gt;
+    <?php endif; ?>
+    <a href="<?= BASE_URL ?>/camps">Prison Camps</a> &gt;
+    <a href="<?= BASE_URL ?>/camps/graph">Graph</a>
+    </p>
+
+  <!--end of breadcrumbs -->
+
   <div>
 
 </div>
@@ -83,7 +96,7 @@
 <script>
 
 var margin = {top: 20, right: 30, bottom: 30, left: 40},
-    width = 1360 - margin.left - margin.right,
+    width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
@@ -108,11 +121,11 @@ var chart = d3.select(".chart")
 
 d3.csv("<?=BASE_URL ?>/public/data.csv", type, function(error, data) {
   x.domain(data.map(function(d) {
-    var split = d.name.split(" ");
-    d.name = "";
-    for(i = 1; i < split.length; i++) {
-        d.name += split[i] + " ";
-    }
+    //var split = d.name.split(" ");
+    //d.name = "";
+    //for(i = 1; i < split.length; i++) {
+    //    d.name += split[i] + " ";
+    //}
     return d.name; }));
   y.domain([0, d3.max(data, function(d) { return d.value; })]);
 

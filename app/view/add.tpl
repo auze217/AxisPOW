@@ -63,8 +63,19 @@
       </ul>
     </div>
   </nav>
+  <!--BreadCrumbs-->
+  <div class="mb-3">
+    <?php if(!isset($_SESSION['username'])): ?>
+    <p><a href="<?= BASE_URL ?>/">Home</a> &gt;
+    <?php else: ?>
+    <p><a href="<?= BASE_URL ?>/dashboard">Home</a> &gt;
+    <?php endif; ?>
+    <a href="<?= BASE_URL ?>/camps">Prison Camps</a> &gt;
+    <a href="<?= BASE_URL ?>/camps/add">Add Camp</a> &gt;
+    </p>
+  </div>
+  <!--end of breadcrumbs -->
 
-  <a class="btn btn-sm btn-outline-secondary" style="float: right;" href="<?=BASE_URL?>/camps/update/<?=$r['id']?>"> Edit Camp Info</a>
 
 
 

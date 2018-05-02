@@ -88,6 +88,9 @@ class CampController {
 
     $q = sprintf("UPDATE camps SET prisoners='$prisoners' WHERE name='$n';");
     $conn->query($q) or die('Error: '.$conn->error);
+
+    $camps = Camp::getCamps();
+    $this->updateCSV($camps);
 		header('Location: '.BASE_URL.'/camps/graph/'); exit();
   }
   public function graph() {
@@ -353,6 +356,7 @@ class CampController {
     $conn->query($q) or die('Error: '.$conn->error);
 		header('Location: '.BASE_URL.'/camps'); exit();
   }
+  //removes something from the graph, and also from the actually database.
   public function removeGraphProcess($name) {
     if(!isset($_SESSION['username'])){
       header('Location: '.BASE_URL.'/login'); exit();
@@ -365,6 +369,9 @@ class CampController {
     $q = sprintf("DELETE FROM camps WHERE name='$name'");
 
     $conn->query($q) or die('Error: '.$conn->error);
+    $camps = Camp::getCamps();
+
+    $this->updateCSV($camps);
     header('Location: '.BASE_URL.'/camps/graph'); exit();
     }
   }

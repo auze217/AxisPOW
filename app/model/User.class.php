@@ -42,7 +42,7 @@ class User {
         $soldier->email = $row['email'];
         $soldier->permissions = $row['permissions'];
         $soldier->image = $row['image'];
-          $soldier->gender = $row['gender'];
+        $soldier->gender = $row['gender'];
         return $soldier; // return the soldier
       }
     }
@@ -72,6 +72,7 @@ class User {
         $soldier->email          = $row['email'];
         $soldier->permissions = $row['permissions'];
         $soldier->image = $row['image'];
+        $soldier->gender = $row['gender'];
         return $soldier; // return the soldier
       }
     }

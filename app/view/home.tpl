@@ -1,27 +1,10 @@
-<!--<!doctype html>
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-
-    <title>Jumbotron Template for Bootstrap</title>
--->    <!-- Bootstrap core CSS -->
-<!--    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
-
--->    <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/4.0/examples/jumbotron/jumbotron.css" rel="stylesheet">
   </head>
-
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <p class="navbar-brand">PBC&copy</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <?php if(isset($_SESSION['username'])): ?>
@@ -57,6 +40,15 @@
     </div>
   </nav>
 
+<!--BreadCrumbs-->
+  <?php if(!isset($_SESSION['username'])): ?>
+  <p id="breadcrumbs" class="clear"><a href="<?= BASE_URL ?>/">Home</a> &gt;
+  <?php else: ?>
+  <p id="breadcrumbs" class="clear"><a href="<?= BASE_URL ?>/dashboard">Home</a> &gt;
+  <?php endif; ?>
+  </p>
+
+<!--end of breadcrumbs -->
 
 
 

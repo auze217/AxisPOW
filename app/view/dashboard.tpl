@@ -47,6 +47,15 @@
     </div>
   </nav>
 
+  <!--BreadCrumbs-->
+    <?php if(!isset($_SESSION['username'])): ?>
+    <p><a href="<?= BASE_URL ?>/">Home</a> &gt;
+    <?php else: ?>
+    <p><a href="<?= BASE_URL ?>/dashboard">Home</a> &gt;
+    <?php endif; ?>
+    </p>
+
+  <!--end of breadcrumbs -->
 
 
     <main role="main" class="container">

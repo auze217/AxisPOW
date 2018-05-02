@@ -48,7 +48,17 @@
       </div>
     </nav>
 
+    <!--BreadCrumbs-->
+      <?php if(!isset($_SESSION['username'])): ?>
+      <p id="breadcrumbs" class="clear"><a href="<?= BASE_URL ?>/">Home</a> &gt;
+      <?php else: ?>
+      <p id="breadcrumbs" class="clear"><a href="<?= BASE_URL ?>/dashboard">Home</a> &gt;
+      <?php endif; ?>
+      <a href="<?= BASE_URL ?>/camps">Prison Camps</a> &gt;
+      <a href="<?= BASE_URL ?>/camps/view/<?= $r['id'] ?>"><?= $r['name'] ?></a>
+      </p>
 
+    <!--end of breadcrumbs -->
 
 
 

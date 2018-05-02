@@ -46,7 +46,19 @@
       </ul>
     </div>
   </nav>
+<?php $row = $result->fetch_assoc() ?>
+  <!--BreadCrumbs-->
+    <?php if(!isset($_SESSION['username'])): ?>
+    <p id="breadcrumbs" class="clear"><a href="<?= BASE_URL ?>/">Home</a> &gt;
+    <?php else: ?>
+    <p id="breadcrumbs" class="clear"><a href="<?= BASE_URL ?>/dashboard">Home</a> &gt;
+    <?php endif; ?>
+    <a href="<?= BASE_URL ?>/camps">Camps</a> &gt;
+    <a href="<?= BASE_URL ?>/camps/view/<?= $row['id'] ?>"><?= $row['name'] ?></a> &gt;
+    <a href="<?= BASE_URL ?>/camps/update/<?= $row['id'] ?>"> Update </a>
+    </p>
 
+  <!--end of breadcrumbs -->
 
 
 
@@ -59,7 +71,6 @@
     <h2>Update a POW Camp</h2>
     <p class="lead">If you want to update a camp enter its information here.</p>
   </div>
-  <?php $row = $result->fetch_assoc() ?>
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Enter Camp Information</h4>
       <form id="add" action="<?= BASE_URL ?>/camps/update/process/<?= $row['id']?>" method="POST" class="needs-validation" novalidate>

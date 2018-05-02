@@ -43,7 +43,17 @@
       </ul>
     </div>
   </nav>
+  <!--BreadCrumbs-->
+    <?php if(!isset($_SESSION['username'])): ?>
+    <p id="breadcrumbs" class="clear"><a href="<?= BASE_URL ?>/">Home</a> &gt;
+    <?php else: ?>
+    <p id="breadcrumbs" class="clear"><a href="<?= BASE_URL ?>/dashboard">Home</a> &gt;
+    <?php endif; ?>
+    <a href="<?= BASE_URL ?>/admin">Admin</a> &gt;
+    <a href="<?= BASE_URL ?>/profile/<?= $user->id ?>"> <?= $user->firstname ?> <?= $user->lastname ?> </a>
+    </p>
 
+  <!--end of breadcrumbs -->
 
 
 <?php foreach($users as $u): ?>

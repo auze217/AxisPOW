@@ -60,7 +60,16 @@
       </div>
     </nav>
 
+    <!--BreadCrumbs-->
+      <?php if(!isset($_SESSION['username'])): ?>
+      <p><a href="<?= BASE_URL ?>/">Home</a> &gt;
+      <?php else: ?>
+      <p><a href="<?= BASE_URL ?>/dashboard">Home</a> &gt;
+      <?php endif; ?>
+      <a href="<?= BASE_URL ?>/camps">Prison Camps</a>
+      </p>
 
+    <!--end of breadcrumbs -->
 
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center text-white bg-light" style="background: url('<?=BASE_URL?>/public/img/background.jpg')">
       <div class="col-md-5 p-lg-5 mx-auto my-5 text-center"style="margin-right:100% !important">
