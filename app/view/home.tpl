@@ -1,7 +1,7 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/jumbotron/jumbotron.css" rel="stylesheet">
   </head>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <p class="navbar-brand">PBC&copy</p>
+    <p class="navbar-brand">PBC&copy;</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -77,8 +77,8 @@
                   <div class="card mb-4 box-shadow">
 
                     <div class="card-body">
-                      <a href="<?= BASE_URL ?>/camps/view/<?= $one->id ?>"class="card-text"><strong> <?= $one->name ?></strong> </a>
-                      <img src="<?= BASE_URL ?>/public/img/<?= $one->image ?>" alt="Image of <?= $one->name ?>" width="250 px" height="150 px">
+                      <a href="<?= BASE_URL ?>/camps/view/<?= $one->id ?>" class="card-text"><strong> <?= $one->name ?></strong> </a>
+                      <img src="<?= BASE_URL ?>/public/img/<?= $one->image ?>" alt="Image of <?= $one->name ?>" width="250" height="150">
 
                       <p class="card-text"><?= $one->state ?></p>
                       <p  class="btn btn-sm btn-outline-secondary"> Prisoners: <?= $one->prisoners ?> </p>
@@ -92,8 +92,8 @@
                     <div class="card mb-4 box-shadow">
 
                       <div class="card-body">
-                        <a href="<?= BASE_URL ?>/camps/view/<?= $two->id ?>"class="card-text"><strong> <?= $two->name ?></strong> </a>
-                        <img src="<?= BASE_URL ?>/public/img/<?= $two->image ?>" alt="Image of <?= $two->name ?>" width="250 px" height="150 px">
+                        <a href="<?= BASE_URL ?>/camps/view/<?= $two->id ?>" class="card-text"><strong> <?= $two->name ?></strong> </a>
+                        <img src="<?= BASE_URL ?>/public/img/<?= $two->image ?>" alt="Image of <?= $two->name ?>" width="250" height="150">
 
                         <p class="card-text"><?= $two->state ?></p>
                         <p  class="btn btn-sm btn-outline-secondary"> Prisoners: <?= $two->prisoners ?> </p>
@@ -108,8 +108,8 @@
                   <div class="card mb-4 box-shadow">
 
                     <div class="card-body">
-                      <a href="<?= BASE_URL ?>/camps/view/<?= $three->id ?>"class="card-text"><strong> <?= $three->name ?></strong> </a>
-                      <img src="<?= BASE_URL ?>/public/img/<?= $three->image ?>" alt="Image of <?= $three->name ?>" width="250 px" height="150 px">
+                      <a href="<?= BASE_URL ?>/camps/view/<?= $three->id ?>" class="card-text"><strong> <?= $three->name ?></strong> </a>
+                      <img src="<?= BASE_URL ?>/public/img/<?= $three->image ?>" alt="Image of <?= $three->name ?>" width="250" height="150">
 
                       <p class="card-text"><?= $three->state ?></p>
                       <p  class="btn btn-sm btn-outline-secondary"> Prisoners: <?= $three->prisoners ?> </p>

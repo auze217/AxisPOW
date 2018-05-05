@@ -4,7 +4,7 @@
 <body class="bg-light">
 
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <p class="navbar-brand">PBC&copy</p>
+    <p class="navbar-brand">PBC&copy;</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -58,7 +58,7 @@
   <!--end of breadcrumbs -->
 
 
-    <main role="main" class="container">
+    <main class="container">
       <div class="d-flex align-items-center p-3 my-3 text-white-50  rounded box-shadow">
         <img class="mr-3" src="<?= BASE_URL ?>/public/img/logo.jpg" alt="" width="48" height="48">
 
@@ -121,9 +121,9 @@
           <a href="#">All suggestions</a>
         </small>
       </div>
-    </main>
+</div>
 
-    <div width="50%">
+    <div style="width: 50%">
     <h5 class="border-bottom border-gray pb-2 mb-0"><strong> Your Recent Activity</strong></h5>
     <?php foreach($uevents as $uevent): ?>
       <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"
@@ -140,7 +140,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.1/examples/offcanvas/offcanvas.js"></script>
+</main>
 
-
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="2" style="font-weight:bold;font-size:2pt;font-family:Arial, Helvetica, Open Sans, sans-serif">32x32</text></svg></body>
-</body>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="2" style="font-weight:bold;font-size:2pt;font-family:Arial, Helvetica, Open Sans, sans-serif">32x32</text></svg>

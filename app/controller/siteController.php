@@ -339,7 +339,7 @@ class SiteController {
 		}
 
 		header('Content-Type: application/json'); // let client know it's Ajax
-	//	echo json_encode($json); // print the JSON
+		echo json_encode($json); // print the JSON
 
 	}
 

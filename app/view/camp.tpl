@@ -5,7 +5,7 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <p class="navbar-brand">PBC&copy</p>
+      <p class="navbar-brand">PBC&copy;</p>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -63,7 +63,7 @@
 
 
 
-    <main role="main">
+    <main>
   <!--    <?php $row=$result->fetch_assoc() ?> -->
       <section class="jumbotron text-center" style="background-image: url('<?= BASE_URL ?>/public/img/<?= $r['image']?>');">
         <div class="container">
@@ -112,12 +112,12 @@
           <!--<input type="text" class="form-control" name="email" id="email" placeholder="you@example.com" required> -->
         </div>
         <input id="submitEventButton" type="button" name="submit" value="Add" class="btn btn-sm btn-outline-secondary"/>
-          <p id="pageId" style="display: none" type="hidden">
+          <p id="pageId" style="display: none">
             <?= $r['id'] ?></p>
       </form>
       <?php while($levents = $life->fetch_assoc()): ?>
       <div class="album py-5 bg-light">
-        <div id="events" class="container">
+        <div class="container">
 
           <div class="row">
             <div class="col-md-4">
@@ -125,7 +125,7 @@
 
                 <div class="card-body">
                   <p class="card-text"><strong> <?= $levents['title'] ?></strong> </p>
-                  <img src="<?= $levents['image'] ?>" alt="Image of <?= $levents['image'] ?>" width="250 px">
+                  <img src="<?= $levents['image'] ?>" alt="Image of <?= $levents['image'] ?>" width="250">
 
                   <p class="card-text"><?= $levents['details'] ?></p>
                   <a href="<?= $levents['url'] ?>" class="btn btn-sm btn-outline-secondary"> More Information </a>

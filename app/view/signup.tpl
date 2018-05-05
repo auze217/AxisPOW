@@ -18,7 +18,7 @@
 
   <body class="bg-light">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <p class="navbar-brand">PBC&copy</p>
+      <p class="navbar-brand">PBC&copy;</p>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -129,10 +129,10 @@
             </div>
 
             <div class="mb-3">
-              <label for="gender">Gender</label>
-              <input type="radio" class="form-control" name="gender" id="gender" value="Male" required>Male<br />
-              <input type="radio" class="form-control" name="gender" id="gender" value="Female" required>Female<br />
-              <input type="radio" class="form-control" name="gender" id="gender" value="Other" required>Other<br />
+              <label>Gender</label>
+              <input type="radio" class="form-control" name="gender" value="Male" required>Male<br />
+              <input type="radio" class="form-control" name="gender" value="Female" required>Female<br />
+              <input type="radio" class="form-control" name="gender" value="Other" required>Other<br />
               <div class="invalid-feedback">
                 Please pick one.
               </div>
@@ -144,4 +144,4 @@
         </div>
       </div>
 
-    </div>
+  

@@ -1,7 +1,7 @@
 
-  <script type="text/javascript" src="<?= BASE_URL ?>/public/js/jquery-3.3.1.min.js"></script>
+  <script  src="<?= BASE_URL ?>/public/js/jquery-3.3.1.min.js"></script>
 
-  <script type="text/javascript" src="<?= BASE_URL ?>/public/js/jquery-script.js"></script>
+  <script  src="<?= BASE_URL ?>/public/js/jquery-script.js"></script>
   <!-- this is commented out because I think there is something wrong with bootstrap itself,
   if you go on the website we literally have the same sign=in and I went on chrome and microsoft edge
   and the website was broken
@@ -10,7 +10,7 @@
 </head>
  <body class="text-center">
    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-     <p class="navbar-brand">PBC&copy</p>
+     <p class="navbar-brand">PBC&copy;</p>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
      </button>
@@ -78,5 +78,5 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
     </form>
-  </body>
-  </html>
+  
+  

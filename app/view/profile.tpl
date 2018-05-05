@@ -4,7 +4,7 @@
 <body class="bg-light">
 
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <p class="navbar-brand">PBC&copy</p>
+    <p class="navbar-brand">PBC&copy;</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -87,7 +87,8 @@ if(isset($_SESSION['username'])):
 </form>
 <?php endif; ?>
 <?php endif; ?> -->
-<div width="50%">
+
+<div style="width: 50%">
 <h5 class="border-bottom border-gray pb-2 mb-0"><strong> Recent updates</strong></h5>
 </div>
 <?php foreach($uevents as $uevent): ?>

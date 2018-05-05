@@ -52,7 +52,7 @@ $(document).ready(function(){
     var new_details = $('#eventDescription').val();
     var new_image = $('#eventImage').val();
     var new_link = $('#eventLink').val();
-    alert(new_title);
+    //alert(new_title);
          if (new_title == "" || new_details == "") {
 
              return;
@@ -64,7 +64,7 @@ $(document).ready(function(){
          // send form data via Ajax
     $.post(
 
-        'http://' + window.location.hostname + '/AxisPOW/camps/view/life-event/add/process/' + new_id,
+        'http://' + window.location.hostname + '/project4/camps/view/life-event/add/process/' + new_id,
         {
             title: new_title,
             details: new_details,

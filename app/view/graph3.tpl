@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
+
 <style>
 
 .bar {
@@ -28,7 +27,7 @@
 </style>
 <body>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <p class="navbar-brand">PBC&copy</p>
+    <p class="navbar-brand">PBC&copy;</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -213,10 +212,7 @@ function type(d) {
   <hr class="mb-4">
   <button class="btn btn-primary btn-lg btn-block" name="submit" type="submit">Add Camp</button>
 </form>
-</div>
-</div>
 
-</div>
 <?php if(isset($_SESSION['username'])): ?>
 <button id="removeEventButton" class="btn btn-sm btn-outline-secondary"> Remove Camp </button>
 
@@ -257,4 +253,3 @@ function type(d) {
     </div>
     <button class="btn btn-primary btn-lg btn-block" name="submit" type="submit">Update Camp</button>
     </form>
-</body>

@@ -16,7 +16,7 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <p class="navbar-brand" href="#">PBC&copy</p>
+      <p class="navbar-brand">PBC&copy;</p>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -72,7 +72,7 @@
     <!--end of breadcrumbs -->
 
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center text-white bg-light" style="background: url('<?=BASE_URL?>/public/img/background.jpg')">
-      <div class="col-md-5 p-lg-5 mx-auto my-5 text-center"style="margin-right:100% !important">
+      <div class="col-md-5 p-lg-5 mx-auto my-5 text-center" style="margin-right:100% !important">
         <h1 class="display-4 font-weight-normal text-center">Prisoner of War Camps in America</h1>
         <p class="lead font-weight-normal text-center">Click on any of the prisoner of war camps to get more information on them.</p>
         <!-- might not need this probably get rid of it -->
@@ -91,7 +91,7 @@
           <?php endif; ?>
           </div>
           <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-          <img style="height:100%" style="width:100%" src="<?= BASE_URL ?>/public/img/<?= $row['image'] ?>" class="img-rounded" alt="Image of <?= $row['name'] ?>"></div>
+          <img style="height:100%; width:100%" src="<?= BASE_URL ?>/public/img/<?= $row['image'] ?>" class="img-rounded" alt="Image of <?= $row['name'] ?>"></div>
         </div>
       </div>
     <?php endwhile; ?>
